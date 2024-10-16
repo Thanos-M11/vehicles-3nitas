@@ -1,0 +1,17 @@
+#vehicle-plate {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  gap: 3em;
+  padding: 1em;
+  margin-bottom: 0.25em;
+
+  &:hover {
+    background-color: rgb(168, 231, 168);
+    cursor: pointer;
+  }
+}
+
+.selected {
+  background-color: lightgreen;
+}

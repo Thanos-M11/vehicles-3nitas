@@ -1,0 +1,8 @@
+<section
+  id="vehicle-plate"
+  [class.selected]="plate === filter.plate"
+  (click)="onSelectVehicle(plate)"
+>
+  <img src="truck-svgrepo-com.svg" alt="truck" width="30" />
+  <p>{{ plate }}</p>
+</section>

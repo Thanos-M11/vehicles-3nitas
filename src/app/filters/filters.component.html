@@ -1,0 +1,51 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <input
+      id="serial-number"
+      name="serial-number"
+      type="text"
+      placeholder="Σειρά-Αριθμός"
+      formControlName="serialNumber"
+    />
+
+    <select formControlName="driver">
+      <option value="" disabled selected>Οδηγός</option>
+      <option value="0">Ολοι</option>
+      @for(driver of driversDropDown; track driver.id){
+      <option [value]="driver.id">{{ driver.fullName }}</option>
+      }
+    </select>
+
+    <section>
+      <label for="start-date">Από</label>
+      <input
+        id="start-date"
+        name="start-date"
+        type="date"
+        formControlName="startDate"
+      />
+    </section>
+
+    <section>
+      <label for="end-date">Έως</label>
+      <input
+        id="end-date"
+        name="end-date"
+        type="date"
+        formControlName="endDate"
+      />
+    </section>
+
+    <select formControlName="isApproved">
+      <option value="" disabled selected>Κατάσταση</option>
+      @for(status of approvedDropDown; track status.id){
+      <option [value]="status.id">{{ status.options }}</option>
+      }
+    </select>
+
+    <button type="submit">Αναζήτηση</button>
+    <button class="clear" type="button" (click)="onClearFilter()">
+      Αναίρεση φίλτρων
+    </button>
+  </fieldset>
+</form>

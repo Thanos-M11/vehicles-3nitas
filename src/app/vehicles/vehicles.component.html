@@ -1,0 +1,23 @@
+<section class="container">
+  <section id="plate-search">
+    <h2>Ενεργά Οχήματα</h2>
+
+    <input
+      type="text"
+      name="plate-search"
+      placeholder="Αναζήτηση πινακίδας"
+      [(ngModel)]="enteredPlate"
+      (blur)="onBlur()"
+    />
+  </section>
+
+  <ul id="vehicles">
+    @for(vehicle of vehicles; track vehicle.id){
+    <li>
+      <app-vehicle [plate]="vehicle.plate" />
+    </li>
+    }@empty {
+    <h3>There are no vehicles to display</h3>
+    }
+  </ul>
+</section>

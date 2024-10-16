@@ -1,0 +1,56 @@
+fieldset {
+  display: flex;
+  justify-content: left;
+  align-items: last baseline;
+  gap: 2em;
+  padding: 2em;
+  background-color: beige;
+}
+
+button {
+  padding: 0.5em 1.5em;
+  border: 1px solid transparent;
+  background-color: lightgreen;
+  border-radius: 1em;
+
+  &:hover {
+    cursor: pointer;
+    background-color: green;
+    color: #fff;
+  }
+}
+
+.clear {
+  background-color: lightpink;
+  &:hover {
+    cursor: pointer;
+    background-color: lightcoral;
+  }
+}
+
+label {
+  font-size: 0.8rem;
+  display: block;
+}
+
+input {
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  box-shadow: 0 0 10px 2px lightgray;
+
+  &:hover {
+    border: 1px solid lightgreen;
+  }
+}
+
+select {
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  box-shadow: 0 0 10px 2px lightgray;
+  background-color: #fff;
+
+  &:hover {
+    cursor: pointer;
+    border: 1px solid lightgreen;
+  }
+}

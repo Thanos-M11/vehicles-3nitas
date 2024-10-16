@@ -1,0 +1,20 @@
+<ul id="pagination">
+  <li>Καταχωρήσεις ανα σελίδα:</li>
+  <li>
+    <form [formGroup]="form" (click)="onSetBatchSize()">
+      <select formControlName="batchSize">
+        @for(size of batchSizes; track size){
+        <option [value]="size">{{ size }}</option>
+        }
+      </select>
+    </form>
+  </li>
+  <li>
+    {{ startPage }} - {{ endPage }} από
+    {{ totalPages }}
+  </li>
+  <li class="move-btn" (click)="onStart()">|<</li>
+  <li class="move-btn" (click)="onPrevious()"><</li>
+  <li class="move-btn" (click)="onNext()">></li>
+  <li class="move-btn" (click)="onEnd()">>|</li>
+</ul>

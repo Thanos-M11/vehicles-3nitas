@@ -1,0 +1,19 @@
+<ul id="record">
+  <li>{{ record.serialNumber }}</li>
+  <li>{{ record.fullName }}</li>
+  <li>{{ formatedIssueDate | date : "dd/MM/YYYY" }}</li>
+  <li
+    [class]="{
+      isApproved: record.isApproved === true,
+      notApproved: record.isApproved === false
+    }"
+  >
+    @if(record.isApproved){ Εγκεκριμένο }@else { Ακυρωμένο }
+  </li>
+  <li class="tier">{{ record.tierAmount | number : "1.2" }}</li>
+  <li>
+    {{ record.registrationAmount | euro }}
+  </li>
+  <li>{{ record.consumptionAmount | unit : "kg" }}</li>
+  <li>{{ record.rewardAmount | euro }}</li>
+</ul>

@@ -1,0 +1,15 @@
+<ul id="records">
+  <ul id="headings">
+    @for(heading of tableHeadings; track heading){
+    <li class="heading">{{ heading }}</li>
+    }
+  </ul>
+
+  @for(record of records; track record.serialNumber){
+  <li>
+    <app-record [record]="record" />
+  </li>
+  }@empty {
+  <h2>Δεν Υπάρχουν καταχωρήσεις</h2>
+  }
+</ul>

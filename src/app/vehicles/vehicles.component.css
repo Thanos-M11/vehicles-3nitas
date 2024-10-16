@@ -1,0 +1,16 @@
+.container {
+}
+
+#plate-search {
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 1em;
+  padding: 1em;
+}
+
+input {
+  margin-top: 1em;
+}
+
+#vehicles {
+  padding: 1em;
+}
