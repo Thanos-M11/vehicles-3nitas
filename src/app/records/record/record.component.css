@@ -3,21 +3,40 @@
   grid-template-columns: repeat(8, 1fr);
   gap: 2em;
   align-items: center;
-  text-align: right;
   border-top: 1px solid lightgray;
   padding: 0.5em 2em 0.5em 0em;
+}
+
+.tier {
+  justify-self: center;
+}
+
+.left {
+  justify-self: left;
+}
+
+.middle {
+  justify-self: center;
+}
+
+.right {
+  justify-self: right;
 }
 
 .isApproved {
   background-color: lightgreen;
   padding: 0.5em 1em;
   border-radius: 1em;
+  text-align: center;
+  width: 130px;
 }
 
 .notApproved {
   background-color: pink;
   padding: 0.5em 1em;
   border-radius: 1em;
+  text-align: center;
+  width: 130px;
 }
 
 .tier {
