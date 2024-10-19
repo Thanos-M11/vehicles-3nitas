@@ -13,7 +13,10 @@ export class FilterService {
     plate: undefined,
   });
 
-  filter$ = this.filterSubject.asObservable();
+  private filterIsActiveSubject = new BehaviorSubject<boolean>(false);
+
+  public filter$ = this.filterSubject.asObservable();
+  public filterIsActive$ = this.filterIsActiveSubject.asObservable();
 
   constructor() {}
 
@@ -26,6 +29,15 @@ export class FilterService {
       isApproved: newFilter.isApproved,
       plate: newFilter.plate,
     });
+    this.setFilterOn();
+  }
+
+  setFilterOn() {
+    this.filterIsActiveSubject.next(true);
+  }
+
+  setFilterOff() {
+    this.filterIsActiveSubject.next(false);
   }
 
   clearFilter() {
@@ -37,5 +49,6 @@ export class FilterService {
       isApproved: undefined,
       plate: undefined,
     });
+    this.setFilterOff();
   }
 }
