@@ -1,83 +1,77 @@
-import { Component, DestroyRef } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { PaginationService } from '../services/pagination.service';
+import { combineLatest } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AsyncPipe, NgIf],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.css',
 })
-export class PaginationComponent {
-  batchSizes = [5, 10, 20, 30, 50]; // number of items per rendered page
+export class PaginationComponent implements OnInit {
+  paginationService = inject(PaginationService);
+  batchSizes!: number[];
+  currentBatch!: number;
+  totalBatches!: number;
   batchSize!: number;
-  totalPages = 85;
-  currentBatch = 1;
-  startPage!: number;
-  endPage!: number;
+  totalPages$ = this.paginationService.totalPages$;
 
-  totalBatches = Math.ceil(this.totalPages / this.batchSize);
+  form!: FormGroup;
 
-  form = new FormGroup({
-    batchSize: new FormControl(this.batchSizes[0]),
-  });
-
-  constructor() // private paginationService: PaginationService,
-  // private destroyRef: DestroyRef
-  {}
+  constructor(private fb: FormBuilder, private destroyRef: DestroyRef) {
+    this.form = this.fb.group({
+      batchSize: new FormControl(5),
+    });
+  }
 
   ngOnInit() {
-    // this.paginationService.startPage$.subscribe({
-    //   next: (start) => (this.startPage = start),
-    // }),
-    //   this.paginationService.endPage$.subscribe({
-    //     next: (end) => (this.endPage = end),
-    //   }),
+    this.batchSizes = this.paginationService.batchSizes;
+    const subscription = combineLatest([
+      this.paginationService.currentBatch$,
+      this.paginationService.batchSize$,
+      this.paginationService.totalBatches$,
+    ]).subscribe(([currentBatch, batchSize, totalBatches]) => {
+      this.currentBatch = currentBatch;
+      this.batchSize = batchSize;
+      this.totalBatches = totalBatches;
+    });
 
-    //
-    this.batchSize = this.form.value.batchSize!;
-    this.calcPageSlice();
+    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   onSetBatchSize() {
-    this.batchSize = this.form.value.batchSize!;
+    this.paginationService.setBatchSize(+this.form.value.batchSize);
   }
 
-  onStart() {
-    this.currentBatch = 1;
-    this.calcPageSlice();
+  onStart(): void {
+    this.paginationService.setCurrentBatch(1);
   }
 
-  onEnd() {
-    this.currentBatch = this.totalBatches;
-    this.calcPageSlice();
+  onEnd(): void {
+    this.paginationService.setCurrentBatch(this.totalBatches);
   }
 
-  onNext() {
+  onNext(): void {
     if (this.currentBatch < this.totalBatches) {
-      this.currentBatch++;
-      this.calcPageSlice();
+      this.paginationService.nextBatch();
     } else {
-      this.currentBatch = 1;
-      this.calcPageSlice();
+      this.paginationService.setCurrentBatch(1);
     }
   }
 
-  onPrevious() {
+  onPrevious(): void {
     if (this.currentBatch > 1) {
-      this.currentBatch--;
-      this.calcPageSlice();
+      this.paginationService.previousBatch();
     } else {
-      this.currentBatch = this.totalBatches;
-      this.calcPageSlice();
+      this.paginationService.setCurrentBatch(this.totalBatches);
     }
-  }
-
-  private calcPageSlice() {
-    this.startPage = this.batchSize * this.currentBatch - this.batchSize + 1;
-    this.endPage = this.batchSize * this.currentBatch;
-    this.totalBatches = Math.ceil(this.totalPages / this.batchSize);
-    // this.paginationService.setPageSlice(this.startPage - 1, this.endPage);
   }
 }

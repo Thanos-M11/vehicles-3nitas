@@ -26,7 +26,6 @@ export class FilterService {
       isApproved: newFilter.isApproved,
       plate: newFilter.plate,
     });
-    console.log(newFilter);
   }
 
   clearFilter() {

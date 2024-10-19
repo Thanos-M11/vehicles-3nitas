@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { SharedPaginationService } from './shared-pagination.service';
+import { inject, Injectable } from '@angular/core';
 import { Record, RecordState } from '../records/records.model';
 
 import recordData from '../../../data/records.json';
@@ -8,17 +9,20 @@ import { formatDate } from '../helper/helper';
 @Injectable({ providedIn: 'root' })
 export class RecordsService {
   private records: RecordState = [];
+  tableHeadings = [
+    'Σειρά Αριθμός',
+    'Οδηγός',
+    'Ημερομηνία',
+    'Κατάσταση',
+    'Κλίμακα επιβράβευσης',
+    'Ποσό καταχώρησης',
+    'Ποσότητα κατανάλωσης',
+    'Ποσό επιβράβευσης',
+  ];
+  sharedPaginationService = inject(SharedPaginationService);
 
   constructor() {
     this.records = recordData;
-  }
-
-  getRecordsCount(): number {
-    return this.records.length;
-  }
-
-  getRecords(): RecordState {
-    return this.records;
   }
 
   getFilteredRecords(filter: Filter): RecordState {
@@ -59,6 +63,11 @@ export class RecordsService {
       }
     }
 
+    this.updateTotalPages(filteredRecords.length);
     return filteredRecords;
+  }
+
+  private updateTotalPages(totalPages: number): void {
+    this.sharedPaginationService.setTotalPages(totalPages);
   }
 }

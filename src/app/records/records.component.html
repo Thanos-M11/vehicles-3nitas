@@ -5,7 +5,7 @@
     }
   </ul>
 
-  @for(record of records; track record.serialNumber){
+  @for(record of records$ | async; track record.serialNumber){
   <li>
     <app-record [record]="record" />
   </li>

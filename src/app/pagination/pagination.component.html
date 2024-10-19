@@ -1,7 +1,7 @@
 <ul id="pagination">
   <li>Καταχωρήσεις ανα σελίδα:</li>
   <li>
-    <form [formGroup]="form" (click)="onSetBatchSize()">
+    <form [formGroup]="form" (change)="onSetBatchSize()">
       <select formControlName="batchSize">
         @for(size of batchSizes; track size){
         <option [value]="size">{{ size }}</option>
@@ -9,8 +9,13 @@
       </select>
     </form>
   </li>
-  <li>
-    {{ startPage }} - {{ endPage }} από
+  <li *ngIf="totalPages$ | async as totalPages">
+    {{ batchSize * currentBatch - batchSize + 1 }} - @if(batchSize *
+    currentBatch > totalPages){
+    <span>{{ totalPages }}</span>
+    }@else {
+    <span>{{ batchSize * currentBatch }}</span>
+    } από
     {{ totalPages }}
   </li>
   <li class="move-btn" (click)="onStart()">|<</li>
