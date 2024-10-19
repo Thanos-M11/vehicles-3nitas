@@ -1,6 +1,8 @@
-@if(selectedVehicle && filterIsActive$ | async){
-<h2>{{ selectedVehicle?.plate }}</h2>
-}@else {
+<mat-toolbar>
+  @if(selectedVehicle && filterIsActive$ | async){
+  <h2>{{ selectedVehicle?.plate }}</h2>
+  }@else {
 
-<h2>Επιλέξτε ένα όχημα για να δείτε τις κινήσεις του</h2>
-}
+  <h2>Επιλέξτε ένα όχημα για να δείτε τις κινήσεις του</h2>
+  }
+</mat-toolbar>

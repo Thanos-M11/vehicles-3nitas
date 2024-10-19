@@ -1,15 +1,15 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { Vehicle } from '../vehicles/vehicles.model';
 import { VehiclesService } from '../services/vehicle.service';
-import { VehicleComponent } from '../vehicles/vehicle/vehicle.component';
 import { Observable } from 'rxjs';
 import { FilterService } from '../services/filter.service';
 import { AsyncPipe } from '@angular/common';
+import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-toolbar',
   standalone: true,
-  imports: [AsyncPipe],
+  imports: [AsyncPipe, MatToolbar],
   templateUrl: './toolbar.component.html',
   styleUrl: './toolbar.component.css',
 })
