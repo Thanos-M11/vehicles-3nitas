@@ -1,3 +1,4 @@
+import { PaginationService } from './../../services/pagination.service';
 import { Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { VehiclesService } from '../../services/vehicle.service';
 import { FilterService } from '../../services/filter.service';
@@ -17,7 +18,8 @@ export class VehicleComponent implements OnInit {
   constructor(
     private vehiclesService: VehiclesService,
     private filterService: FilterService,
-    private destroyRef: DestroyRef
+    private destroyRef: DestroyRef,
+    private paginationService: PaginationService
   ) {}
 
   ngOnInit() {
@@ -34,5 +36,6 @@ export class VehicleComponent implements OnInit {
       ...this.filter,
       plate: selectedPlate,
     });
+    this.paginationService.setCurrentBatch(1);
   }
 }
