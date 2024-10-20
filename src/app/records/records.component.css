@@ -1,14 +1,12 @@
-#records {
-  background-color: beige;
-  /* border-radius: 0.5em; */
-  display: flex;
-  flex-direction: column;
+.isApproved {
+  background-color: lightgreen;
 }
 
-#headings {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  font-size: 0.8rem;
-  text-align: center;
-  padding: 1.5em 1em;
+.notApproved {
+  background-color: pink;
+}
+
+.tier {
+  background-color: navy;
+  color: #fff;
 }

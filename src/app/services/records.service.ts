@@ -9,16 +9,17 @@ import { formatDate } from '../helper/helper';
 @Injectable({ providedIn: 'root' })
 export class RecordsService {
   private records: RecordState = [];
-  tableHeadings = [
-    'Σειρά Αριθμός',
-    'Οδηγός',
-    'Ημερομηνία',
-    'Κατάσταση',
-    'Κλίμακα επιβράβευσης',
-    'Ποσό καταχώρησης',
-    'Ποσότητα κατανάλωσης',
-    'Ποσό επιβράβευσης',
+  public displayedColumns = [
+    'serialNumber',
+    'fullName',
+    'issueDate',
+    'isApproved',
+    'tierAmount',
+    'registrationAmount',
+    'consumptionAmount',
+    'rewardAmount',
   ];
+
   sharedPaginationService = inject(SharedPaginationService);
 
   constructor() {

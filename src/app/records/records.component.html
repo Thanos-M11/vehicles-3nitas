@@ -1,15 +1,61 @@
-<ul id="records">
-  <ul id="headings">
-    @for(heading of tableHeadings; track heading){
-    <li class="heading">{{ heading }}</li>
-    }
-  </ul>
+<table mat-table [dataSource]="dataSource">
+  <ng-container matColumnDef="serialNumber">
+    <th mat-header-cell *matHeaderCellDef>Σειρά Αριθμός</th>
+    <td mat-cell *matCellDef="let element">{{ element.serialNumber }}</td>
+  </ng-container>
 
-  @for(record of records$ | async; track record.serialNumber){
-  <li>
-    <app-record [record]="record" />
-  </li>
-  }@empty {
-  <h2>Δεν Υπάρχουν καταχωρήσεις</h2>
-  }
-</ul>
+  <ng-container matColumnDef="fullName">
+    <th mat-header-cell *matHeaderCellDef>Οδηγός</th>
+    <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="issueDate">
+    <th mat-header-cell *matHeaderCellDef>Ημερομηνία</th>
+    <td mat-cell *matCellDef="let element">{{ element.issueDate }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="isApproved">
+    <th mat-header-cell *matHeaderCellDef>Κατάσταση</th>
+    <td
+      [class]="{
+        isApproved: element.isApproved === true,
+        notApproved: element.isApproved === false
+      }"
+      mat-cell
+      *matCellDef="let element"
+    >
+      @if(element.isApproved){ Εγκεκριμένο }@else { Ακυρωμένο }
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tierAmount">
+    <th mat-header-cell *matHeaderCellDef>Κλίμακα επιβράβευσης</th>
+    <td class="tier" mat-cell *matCellDef="let element">
+      {{ element.tierAmount | number : "1.2" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="registrationAmount">
+    <th mat-header-cell *matHeaderCellDef>Ποσό καταχώρησης</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.registrationAmount | euro }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="consumptionAmount">
+    <th mat-header-cell *matHeaderCellDef>Ποσότητα κατανάλωσης</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.consumptionAmount | unit : "kg" }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="rewardAmount">
+    <th mat-header-cell *matHeaderCellDef>Ποσό επιβράβευσης</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.rewardAmount | euro }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
