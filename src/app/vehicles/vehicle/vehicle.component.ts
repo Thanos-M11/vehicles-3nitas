@@ -1,14 +1,14 @@
 import { PaginationService } from './../../services/pagination.service';
-import { Component, DestroyRef, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { VehiclesService } from '../../services/vehicle.service';
 import { FilterService } from '../../services/filter.service';
 import { Filter } from '../../filters/filter.model';
-import { MatIconModule } from '@angular/material/icon';
+import { TruckIconComponent } from '../../shared/truck-icon/truck-icon.component';
 
 @Component({
   selector: 'app-vehicle',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [TruckIconComponent],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })

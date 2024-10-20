@@ -1,7 +1,7 @@
 #plate-search {
   border-bottom: 2px solid lightgray;
   margin-bottom: 1em;
-  padding: 1em;
+  padding: 2em;
 }
 
 input {
@@ -10,4 +10,11 @@ input {
 
 #vehicles {
   padding: 1em;
+}
+
+.active-vehicles {
+  display: flex;
+  gap: 2em;
+  align-items: center;
+  justify-content: left;
 }

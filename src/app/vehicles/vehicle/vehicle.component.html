@@ -3,13 +3,7 @@
   [class.selected]="plate === filter.plate"
   (click)="onSelectVehicle(plate)"
 >
-  <!-- 
-  <mat-icon
-    svgIcon=""
-    aria-hidden="false"
-    aria-label="truck SVG icon"
-  ></mat-icon> -->
+  <app-truck-icon />
 
-  <img src="truck-svgrepo-com.svg" alt="truck SVG icon" />
   <p>{{ plate }}</p>
 </section>
