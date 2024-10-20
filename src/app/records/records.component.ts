@@ -4,15 +4,24 @@ import { FilterService } from '../services/filter.service';
 import { Record } from './records.model';
 import { combineLatest, Observable, of, switchMap } from 'rxjs';
 import { PaginationService } from '../services/pagination.service';
-import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EuroPipe } from './euro.pipe';
 import { UnitPipe } from './unit.pipe';
+import { RecordDatePipe } from './record-date.pipe';
 
 @Component({
   selector: 'app-records',
   standalone: true,
-  imports: [AsyncPipe, MatTableModule, EuroPipe, UnitPipe, DecimalPipe],
+  imports: [
+    AsyncPipe,
+    MatTableModule,
+    EuroPipe,
+    UnitPipe,
+    DecimalPipe,
+    RecordDatePipe,
+    DatePipe,
+  ],
   templateUrl: './records.component.html',
   styleUrl: './records.component.css',
 })

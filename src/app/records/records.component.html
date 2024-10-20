@@ -11,7 +11,9 @@
 
   <ng-container matColumnDef="issueDate">
     <th mat-header-cell *matHeaderCellDef>Ημερομηνία</th>
-    <td mat-cell *matCellDef="let element">{{ element.issueDate }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element.issueDate | recordDate | date : "dd/MM/YYYY" }}
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="isApproved">
