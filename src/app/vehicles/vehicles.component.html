@@ -11,13 +11,13 @@
     />
   </section>
 
-  <ul id="vehicles">
+  <mat-nav-list>
     @for(vehicle of vehicles; track vehicle.id){
-    <li>
+    <mat-list-item>
       <app-vehicle [plate]="vehicle.plate" />
-    </li>
+    </mat-list-item>
     }@empty {
     <h3>There are no vehicles to display</h3>
     }
-  </ul>
+  </mat-nav-list>
 </section>

@@ -11,11 +11,12 @@ import { VehiclesService } from '../services/vehicle.service';
 import { FormsModule } from '@angular/forms';
 import { FilterService } from '../services/filter.service';
 import { Filter } from '../filters/filter.model';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-vehicles',
   standalone: true,
-  imports: [VehicleComponent, FormsModule],
+  imports: [VehicleComponent, FormsModule, MatListModule],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',
 })

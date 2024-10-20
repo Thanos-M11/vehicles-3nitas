@@ -1,4 +1,3 @@
-.container {
-  display: grid;
-  grid-template-columns: 1fr 11fr;
+.sidenav-container {
+  height: 100vh;
 }

@@ -1,10 +1,16 @@
-<main class="container">
-  <app-vehicles />
+<main>
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav mode="side" opened>
+      <app-vehicles />
+    </mat-sidenav>
 
-  <section>
-    <app-toolbar />
-    <app-filters />
-    <app-records />
-    <app-pagination />
-  </section>
+    <mat-sidenav-content>
+      <section>
+        <app-toolbar />
+        <app-filters />
+        <app-records />
+        <app-pagination />
+      </section>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </main>

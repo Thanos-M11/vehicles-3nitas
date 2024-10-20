@@ -4,12 +4,7 @@
   align-items: center;
   gap: 3em;
   padding: 1em;
-  margin-bottom: 0.25em;
-
-  &:hover {
-    background-color: rgb(168, 231, 168);
-    cursor: pointer;
-  }
+  font-size: 1.25rem;
 }
 
 .selected {

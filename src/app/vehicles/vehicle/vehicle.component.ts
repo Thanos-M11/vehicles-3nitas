@@ -3,11 +3,12 @@ import { Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { VehiclesService } from '../../services/vehicle.service';
 import { FilterService } from '../../services/filter.service';
 import { Filter } from '../../filters/filter.model';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-vehicle',
   standalone: true,
-  imports: [],
+  imports: [MatIconModule],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })
