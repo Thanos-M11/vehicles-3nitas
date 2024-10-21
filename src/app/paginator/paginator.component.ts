@@ -24,7 +24,7 @@ export class CustomPaginatorIntl implements MatPaginatorIntl {
     }
     const amountPages = Math.ceil(length / pageSize);
     return `${page * pageSize + 1} - ${
-      page * pageSize + pageSize
+      length > page * pageSize + pageSize ? page * pageSize + pageSize : length
     } από ${length}`;
   }
 }
