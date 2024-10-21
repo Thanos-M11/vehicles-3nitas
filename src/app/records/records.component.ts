@@ -1,9 +1,9 @@
+import { PaginatorService } from './../services/paginator.service';
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { RecordsService } from '../services/records.service';
 import { FilterService } from '../services/filter.service';
 import { Record } from './records.model';
 import { combineLatest, Observable, of, switchMap } from 'rxjs';
-import { PaginationService } from '../services/pagination.service';
 import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EuroPipe } from './euro.pipe';
@@ -28,7 +28,7 @@ import { RecordDatePipe } from './record-date.pipe';
 export class RecordsComponent implements OnInit {
   private recordsService = inject(RecordsService);
   private filterService = inject(FilterService);
-  private paginationService = inject(PaginationService);
+  private paginatorService = inject(PaginatorService);
   private destroyRef = inject(DestroyRef);
   public formatedIssueDate!: Date;
 
@@ -42,13 +42,13 @@ export class RecordsComponent implements OnInit {
     this.displayedColumns = this.recordsService.displayedColumns;
     this.records$ = combineLatest([
       this.filterService.filter$,
-      this.paginationService.batchSize$,
-      this.paginationService.currentBatch$,
+      this.paginatorService.pageSize$,
+      this.paginatorService.pageIndex$,
     ]).pipe(
-      switchMap(([filter, batchSize, currentBatch]) => {
+      switchMap(([filter, pageSize, pageIndex]) => {
         const filteredRecords = this.recordsService.getFilteredRecords(filter);
-        const start = currentBatch * batchSize - batchSize;
-        const end = currentBatch * batchSize;
+        const start = pageIndex * pageSize;
+        const end = pageIndex * pageSize + pageSize;
         return of(filteredRecords.slice(start, end));
       })
     );

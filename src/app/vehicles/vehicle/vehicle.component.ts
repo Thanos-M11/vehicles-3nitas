@@ -1,9 +1,9 @@
-import { PaginationService } from './../../services/pagination.service';
 import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { VehiclesService } from '../../services/vehicle.service';
 import { FilterService } from '../../services/filter.service';
 import { Filter } from '../../filters/filter.model';
 import { TruckIconComponent } from '../../shared/truck-icon/truck-icon.component';
+import { PaginatorService } from '../../services/paginator.service';
 
 @Component({
   selector: 'app-vehicle',
@@ -20,7 +20,7 @@ export class VehicleComponent implements OnInit {
     private vehiclesService: VehiclesService,
     private filterService: FilterService,
     private destroyRef: DestroyRef,
-    private paginationService: PaginationService
+    private paginatorService: PaginatorService
   ) {}
 
   ngOnInit() {
@@ -37,6 +37,6 @@ export class VehicleComponent implements OnInit {
       ...this.filter,
       plate: selectedPlate,
     });
-    this.paginationService.setCurrentBatch(1);
+    this.paginatorService.setPageIndex(0);
   }
 }

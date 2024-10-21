@@ -3,10 +3,10 @@ import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class SharedPaginationService {
-  private totalPagesSubject = new BehaviorSubject<number>(0);
-  totalPages$ = this.totalPagesSubject.asObservable();
+  private lengthSubject = new BehaviorSubject<number>(0);
+  public length$ = this.lengthSubject.asObservable();
 
-  setTotalPages(totalPages: number): void {
-    this.totalPagesSubject.next(totalPages);
+  setLength(length: number): void {
+    this.lengthSubject.next(length);
   }
 }

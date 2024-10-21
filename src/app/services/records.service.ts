@@ -1,7 +1,6 @@
 import { SharedPaginationService } from './shared-pagination.service';
 import { inject, Injectable } from '@angular/core';
 import { Record, RecordState } from '../records/records.model';
-
 import recordData from '../../../data/records.json';
 import { Filter } from '../filters/filter.model';
 import { formatDate } from '../helper/helper';
@@ -68,7 +67,7 @@ export class RecordsService {
     return filteredRecords;
   }
 
-  private updateTotalPages(totalPages: number): void {
-    this.sharedPaginationService.setTotalPages(totalPages);
+  private updateTotalPages(length: number): void {
+    this.sharedPaginationService.setLength(length);
   }
 }

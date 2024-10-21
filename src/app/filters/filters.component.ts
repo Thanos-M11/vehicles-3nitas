@@ -3,7 +3,6 @@ import {
   Component,
   DestroyRef,
   OnInit,
-  ViewEncapsulation,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Filter } from './filter.model';
