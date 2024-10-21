@@ -1,6 +1,6 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <fieldset class="container">
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Σειρά Αριθμός</mat-label>
       <input
         matInput
@@ -11,7 +11,7 @@
       />
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field appearance="fill">
       <mat-label>Οδηγός</mat-label>
       <mat-select formControlName="driver">
         <mat-option [value]="0">Όλοι</mat-option>

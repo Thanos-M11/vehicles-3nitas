@@ -1,11 +1,14 @@
 #plate-search {
-  border-bottom: 2px solid lightgray;
   margin-bottom: 1em;
   padding: 2em;
 }
 
-input {
-  margin-top: 1em;
+.plate-input {
+  margin-top: 2em;
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  border-bottom: 2px solid lightgray;
 }
 
 #vehicles {

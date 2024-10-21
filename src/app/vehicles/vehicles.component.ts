@@ -7,11 +7,25 @@ import { FilterService } from '../services/filter.service';
 import { Filter } from '../filters/filter.model';
 import { MatListModule } from '@angular/material/list';
 import { TruckIconComponent } from '../shared/truck-icon/truck-icon.component';
+import { MagnifierIconComponent } from '../shared/magnifier-icon/magnifier-icon.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-vehicles',
   standalone: true,
-  imports: [VehicleComponent, FormsModule, MatListModule, TruckIconComponent],
+  imports: [
+    VehicleComponent,
+    FormsModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatInputModule,
+    TruckIconComponent,
+    MagnifierIconComponent,
+    AsyncPipe,
+  ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',
 })
@@ -35,12 +49,13 @@ export class VehiclesComponent implements OnInit {
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  onBlur() {
+  handleEnteredPlate() {
     this.vehicleService.setSelectedVehicle(this.enteredPlate);
 
     this.filterService.setFilter({
       ...this.filter,
       plate: this.enteredPlate,
     });
+    this.enteredPlate = '';
   }
 }

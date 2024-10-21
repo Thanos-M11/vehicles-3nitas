@@ -1,0 +1,5 @@
+mat-paginator {
+  margin-top: 0.15em;
+  background-color: hsl(0, 0%, 94%);
+  box-shadow: 0 1px 5px hsl(0, 0%, 54%);
+}
