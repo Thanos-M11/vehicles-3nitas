@@ -20,7 +20,7 @@ export class CustomPaginatorIntl implements MatPaginatorIntl {
 
   getRangeLabel(page: number, pageSize: number, length: number): string {
     if (length === 0) {
-      return `Σελίδα 1 από 1`;
+      return `0 από 0`;
     }
     const amountPages = Math.ceil(length / pageSize);
     return `${page * pageSize + 1} - ${
