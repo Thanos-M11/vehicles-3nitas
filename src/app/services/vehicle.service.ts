@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import vehiclesData from '../../../data/vehicles.json';
+import vehiclesData from '../../../backend/data/vehicles.json';
 import { Vehicle, VehicleState } from '../vehicles/vehicles.model';
 import { BehaviorSubject } from 'rxjs';
 

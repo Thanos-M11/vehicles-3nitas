@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-import driversData from '../../../data/drivers.json';
+import driversData from '../../../backend/data/drivers.json';
 import { DriverState } from '../vehicles/vehicles.model';
 
 @Injectable({ providedIn: 'root' })
