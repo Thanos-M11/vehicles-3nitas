@@ -2,13 +2,13 @@ import {
   ChangeDetectionStrategy,
   Component,
   DestroyRef,
+  inject,
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Filter } from './filter.model';
 import { FilterService } from '../services/filter.service';
 import { DriversService } from '../services/driver.service';
-import { DriverState, Vehicle } from '../vehicles/vehicles.model';
 import { VehiclesService } from '../services/vehicle.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,9 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
+import { Driver, DriverState } from '../drivers/drivers.model';
+import { Vehicle } from '../vehicles/vehicles.model';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'app-filters',
@@ -34,21 +37,21 @@ import { provideNativeDateAdapter } from '@angular/material/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FiltersComponent implements OnInit {
+  private filterService = inject(FilterService);
+  private driversService = inject(DriversService);
+  private vehicleService = inject(VehiclesService);
+  private destroyRef = inject(DestroyRef);
+
   approvedDropDown = [
     { id: '2', options: 'Ολες' },
     { id: '1', options: 'Εγκεκριμένο' },
     { id: '0', options: 'Ακυρωμένο' },
   ];
 
-  driversDropDown!: DriverState;
-  vehicleSelected!: Vehicle;
+  public driversDropDown!: DriverState;
+  public vehicleSelected!: Vehicle;
 
-  constructor(
-    private filterService: FilterService,
-    private driversService: DriversService,
-    private vehicleService: VehiclesService,
-    private destroyRef: DestroyRef
-  ) {}
+  constructor() {}
 
   form = new FormGroup({
     serialNumber: new FormControl(),
@@ -61,9 +64,14 @@ export class FiltersComponent implements OnInit {
   });
 
   ngOnInit() {
-    this.driversDropDown = this.driversService.getDrivers();
-    const subscription = this.vehicleService.selectedVehicle$.subscribe({
-      next: (vehicle) => (this.vehicleSelected = vehicle!),
+    const subscription = combineLatest([
+      this.vehicleService.selectedVehicle$,
+      this.driversService.loadDrivers$(),
+    ]).subscribe({
+      next: ([vehicle, drivers]) => {
+        this.vehicleSelected = vehicle!;
+        this.driversDropDown = drivers;
+      },
     });
 
     this.destroyRef.onDestroy(() => subscription.unsubscribe());

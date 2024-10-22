@@ -1,17 +1,27 @@
-import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
 
-import driversData from '../../../backend/data/drivers.json';
-import { DriverState } from '../vehicles/vehicles.model';
+import { catchError, map, throwError } from 'rxjs';
+import { Driver } from '../drivers/drivers.model';
 
 @Injectable({ providedIn: 'root' })
 export class DriversService {
-  private drivers: DriverState = [];
+  private httpClient = inject(HttpClient);
 
-  constructor() {
-    this.drivers = driversData;
+  loadDrivers$() {
+    return this.fetchDrivers(
+      'http://localhost:3000/drivers',
+      'Something went wrong fetching drivers'
+    );
   }
 
-  getDrivers() {
-    return this.drivers;
+  private fetchDrivers(url: string, errorMessage: string) {
+    return this.httpClient.get<{ drivers: Driver[] }>(url).pipe(
+      map((resData) => resData.drivers),
+      catchError((error) => {
+        console.log(error);
+        return throwError(() => new Error(errorMessage));
+      })
+    );
   }
 }
