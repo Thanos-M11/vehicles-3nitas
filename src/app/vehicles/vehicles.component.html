@@ -18,13 +18,15 @@
     </section>
   </section>
 
+  @if(isLoading$ | async){
+  <p class="loading-fallback">Loading Vehicles...</p>
+  }
+
   <mat-nav-list>
     @for(vehicle of vehicles; track vehicle.id){
     <mat-list-item>
       <app-vehicle [plate]="vehicle.plate" />
     </mat-list-item>
-    }@empty {
-    <h3>There are no vehicles to display</h3>
     }
   </mat-nav-list>
 </section>
