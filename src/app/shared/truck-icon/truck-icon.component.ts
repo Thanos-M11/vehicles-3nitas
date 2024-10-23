@@ -3,7 +3,7 @@ import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 const TRUCK_ICON = `
-<svg fill="#000000" height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+<svg height="30px" width="30px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
 	 viewBox="0 0 491.928 491.928" xml:space="preserve">
 <path d="M488.56,226.977l-83.433-83.433c-2.157-2.156-5.082-3.368-8.132-3.368H337.13V96.312c0-11.544-9.982-21.297-21.797-21.297
 	L21.297,75.015C9.554,75.015,0,84.568,0,96.312v243.949c0,11.744,9.554,21.298,21.297,21.298h34.987

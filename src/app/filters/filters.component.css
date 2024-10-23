@@ -1,6 +1,15 @@
-.container {
+mat-form-field {
+  margin: 0.5em;
+}
+
+.serial-number-label {
   display: flex;
-  gap: 1em;
   align-items: center;
-  margin-bottom: 2.5em;
+  justify-content: center;
+  gap: 1em;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 1em;
 }

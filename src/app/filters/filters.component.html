@@ -1,7 +1,10 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <fieldset class="container">
+  <fieldset>
     <mat-form-field appearance="fill">
-      <mat-label>Σειρά Αριθμός</mat-label>
+      <mat-label class="serial-number-label">
+        <app-magnifier-icon />
+        <span>Σειρά Αριθμός</span>
+      </mat-label>
       <input
         matInput
         id="serial-number"

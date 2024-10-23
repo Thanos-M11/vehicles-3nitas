@@ -4,11 +4,14 @@ import { FilterService } from '../../services/filter.service';
 import { Filter } from '../../filters/filter.model';
 import { TruckIconComponent } from '../../shared/truck-icon/truck-icon.component';
 import { PaginatorService } from '../../services/paginator.service';
+import { ThreeDotsIconComponent } from '../../shared/three-dots-icon/three-dots-icon.component';
+import { DeleteIconComponent } from '../../shared/delete-icon/delete-icon.component';
+import { EditPencilIconComponent } from '../../shared/edit-pencil-icon/edit-pencil-icon.component';
 
 @Component({
   selector: 'app-vehicle',
   standalone: true,
-  imports: [TruckIconComponent],
+  imports: [TruckIconComponent, ThreeDotsIconComponent, DeleteIconComponent, EditPencilIconComponent],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })
