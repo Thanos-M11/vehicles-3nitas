@@ -19,7 +19,7 @@
   </section>
 
   @if(isLoading$ | async){
-  <p class="loading-fallback">Loading Vehicles...</p>
+  <app-progress-spinner diameter="50" />
   }
 
   <mat-nav-list>

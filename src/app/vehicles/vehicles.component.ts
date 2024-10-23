@@ -12,6 +12,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-vehicles',
@@ -25,6 +26,7 @@ import { AsyncPipe } from '@angular/common';
     TruckIconComponent,
     MagnifierIconComponent,
     AsyncPipe,
+    ProgressSpinnerComponent,
   ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',

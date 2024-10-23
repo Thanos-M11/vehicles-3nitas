@@ -9,6 +9,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EuroPipe } from './euro.pipe';
 import { UnitPipe } from './unit.pipe';
 import { RecordDatePipe } from './record-date.pipe';
+import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
 
 @Component({
   selector: 'app-records',
@@ -21,6 +22,7 @@ import { RecordDatePipe } from './record-date.pipe';
     DecimalPipe,
     RecordDatePipe,
     DatePipe,
+    ProgressSpinnerComponent,
   ],
   templateUrl: './records.component.html',
   styleUrl: './records.component.css',

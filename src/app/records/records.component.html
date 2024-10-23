@@ -1,6 +1,7 @@
 @if(isLoading$ | async){
-<h4>Loading available records</h4>
-}
+<app-progress-spinner diameter="50" />
+}@else {
+
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="serialNumber">
     <th mat-header-cell *matHeaderCellDef>Σειρά Αριθμός</th>
@@ -64,3 +65,4 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
+}
