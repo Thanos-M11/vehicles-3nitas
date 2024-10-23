@@ -1,13 +1,18 @@
 import { SharedPaginationService } from './shared-pagination.service';
 import { inject, Injectable } from '@angular/core';
 import { Record, RecordState } from '../records/records.model';
-import recordData from '../../../backend/data/records.json';
 import { Filter } from '../filters/filter.model';
 import { formatDate } from '../helper/helper';
+import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class RecordsService {
-  private records: RecordState = [];
+  private httpClient = inject(HttpClient);
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
+
+  public isLoading$ = this.isLoadingSubject.asObservable();
+
   public displayedColumns = [
     'serialNumber',
     'fullName',
@@ -21,50 +26,78 @@ export class RecordsService {
 
   sharedPaginationService = inject(SharedPaginationService);
 
-  constructor() {
-    this.records = recordData;
+  setIsLoading(value: boolean): void {
+    this.isLoadingSubject.next(value);
   }
 
-  getFilteredRecords(filter: Filter): RecordState {
-    let filteredRecords = [...this.records];
+  loadRecords$(filter: Filter): Observable<Record[] | []> {
+    this.setIsLoading(true);
+    return this.fetchRecords(
+      'http://localhost:3000/records',
+      'Something went wrong fetching records',
+      filter
+    );
+  }
 
-    const filterConditions = [
-      filter.serialNumber
-        ? (record: Record) => record.serialNumber === filter.serialNumber
-        : null,
+  private fetchRecords(
+    url: string,
+    errorMessage: string,
+    filter: Filter
+  ): Observable<Record[] | []> {
+    return this.httpClient.get<{ records: Record[] }>(url).pipe(
+      map((resData) => {
+        let records = resData.records;
 
-      filter.startDate
-        ? (record: Record) =>
-            formatDate(record.issueDate).getTime() >=
-            filter.startDate!.getTime()
-        : null,
+        if (filter) {
+          const filterConditions = [
+            filter.serialNumber
+              ? (record: Record) => record.serialNumber === filter.serialNumber
+              : null,
 
-      filter.endDate
-        ? (record: Record) =>
-            formatDate(record.issueDate).getTime() <= filter.endDate!.getTime()
-        : null,
+            filter.startDate
+              ? (record: Record) =>
+                  formatDate(record.issueDate).getTime() >=
+                  filter.startDate!.getTime()
+              : null,
 
-      filter.driverId
-        ? (record: Record) => record.driverId === filter.driverId
-        : null,
+            filter.endDate
+              ? (record: Record) =>
+                  formatDate(record.issueDate).getTime() <=
+                  filter.endDate!.getTime()
+              : null,
 
-      filter.isApproved === '0'
-        ? (record: Record) => record.isApproved === false
-        : filter.isApproved === '1'
-        ? (record: Record) => record.isApproved === true
-        : null,
+            filter.driverId
+              ? (record: Record) => record.driverId === filter.driverId
+              : null,
 
-      filter.plate ? (record: Record) => record.plate === filter.plate : null,
-    ];
+            filter.isApproved === '0'
+              ? (record: Record) => record.isApproved === false
+              : filter.isApproved === '1'
+              ? (record: Record) => record.isApproved === true
+              : null,
 
-    for (const condition of filterConditions) {
-      if (condition) {
-        filteredRecords = filteredRecords.filter(condition);
-      }
-    }
+            filter.plate
+              ? (record: Record) => record.plate === filter.plate
+              : null,
+          ];
 
-    this.updateTotalPages(filteredRecords.length);
-    return filteredRecords;
+          // applying conditions
+          for (const condition of filterConditions) {
+            if (condition) {
+              records = records.filter(condition);
+            }
+          }
+        }
+
+        this.updateTotalPages(records.length);
+        this.setIsLoading(false);
+        return records;
+      }),
+      catchError((error) => {
+        console.log(error);
+        return throwError(() => new Error(error.message));
+      })
+    );
   }
 
   private updateTotalPages(length: number): void {

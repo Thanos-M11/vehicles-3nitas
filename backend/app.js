@@ -15,7 +15,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/drivers", async (req, res) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const fileContent = await fs.readFile("./data/drivers.json");
 
@@ -25,7 +25,7 @@ app.get("/drivers", async (req, res) => {
 });
 
 app.get("/vehicles", async (req, res) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const fileContent = await fs.readFile("./data/vehicles.json");
 
@@ -35,7 +35,7 @@ app.get("/vehicles", async (req, res) => {
 });
 
 app.get("/records", async (req, res) => {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
 
   const fileContent = await fs.readFile("./data/records.json");
 

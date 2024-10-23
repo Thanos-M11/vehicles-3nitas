@@ -1,3 +1,6 @@
+@if(isLoading$ | async){
+<h4>Loading available records</h4>
+}
 <table mat-table [dataSource]="dataSource">
   <ng-container matColumnDef="serialNumber">
     <th mat-header-cell *matHeaderCellDef>Σειρά Αριθμός</th>

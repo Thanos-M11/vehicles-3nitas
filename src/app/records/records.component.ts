@@ -1,9 +1,9 @@
 import { PaginatorService } from './../services/paginator.service';
-import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { RecordsService } from '../services/records.service';
 import { FilterService } from '../services/filter.service';
 import { Record } from './records.model';
-import { combineLatest, Observable, of, switchMap } from 'rxjs';
+import { combineLatest, map, Observable, switchMap } from 'rxjs';
 import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EuroPipe } from './euro.pipe';
@@ -30,10 +30,11 @@ export class RecordsComponent implements OnInit {
   private filterService = inject(FilterService);
   private paginatorService = inject(PaginatorService);
   private destroyRef = inject(DestroyRef);
-  public formatedIssueDate!: Date;
 
+  public formatedIssueDate!: Date;
   public records$!: Observable<Record[]>;
   public displayedColumns!: string[];
+  public isLoading$ = this.recordsService.isLoading$;
   public dataSource = new MatTableDataSource<Record>();
 
   constructor() {}
@@ -45,12 +46,15 @@ export class RecordsComponent implements OnInit {
       this.paginatorService.pageSize$,
       this.paginatorService.pageIndex$,
     ]).pipe(
-      switchMap(([filter, pageSize, pageIndex]) => {
-        const filteredRecords = this.recordsService.getFilteredRecords(filter);
-        const start = pageIndex * pageSize;
-        const end = pageIndex * pageSize + pageSize;
-        return of(filteredRecords.slice(start, end));
-      })
+      switchMap(([filter, pageSize, pageIndex]) =>
+        this.recordsService.loadRecords$(filter).pipe(
+          map((filteredRecords: Record[]) => {
+            const start = pageIndex * pageSize;
+            const end = pageIndex * pageSize + pageSize;
+            return filteredRecords.slice(start, end);
+          })
+        )
+      )
     );
     const subscription = this.records$.subscribe((records) => {
       this.dataSource.data = records || [];
