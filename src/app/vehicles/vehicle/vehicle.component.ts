@@ -2,16 +2,21 @@ import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
 import { VehiclesService } from '../../services/vehicle.service';
 import { FilterService } from '../../services/filter.service';
 import { Filter } from '../../filters/filter.model';
-import { TruckIconComponent } from '../../shared/truck-icon/truck-icon.component';
+import { TruckIconComponent } from '../../shared/icons/truck-icon/truck-icon.component';
 import { PaginatorService } from '../../services/paginator.service';
-import { ThreeDotsIconComponent } from '../../shared/three-dots-icon/three-dots-icon.component';
-import { DeleteIconComponent } from '../../shared/delete-icon/delete-icon.component';
-import { EditPencilIconComponent } from '../../shared/edit-pencil-icon/edit-pencil-icon.component';
+import { ThreeDotsIconComponent } from '../../shared/icons/three-dots-icon/three-dots-icon.component';
+import { DeleteIconComponent } from '../../shared/icons/delete-icon/delete-icon.component';
+import { EditPencilIconComponent } from '../../shared/icons/edit-pencil-icon/edit-pencil-icon.component';
 
 @Component({
   selector: 'app-vehicle',
   standalone: true,
-  imports: [TruckIconComponent, ThreeDotsIconComponent, DeleteIconComponent, EditPencilIconComponent],
+  imports: [
+    TruckIconComponent,
+    ThreeDotsIconComponent,
+    DeleteIconComponent,
+    EditPencilIconComponent,
+  ],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })

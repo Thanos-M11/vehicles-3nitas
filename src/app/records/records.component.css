@@ -20,3 +20,32 @@
 table {
   box-shadow: 0 1px 5px hsl(0, 0%, 54%);
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  scale: 0.7;
+}
+
+app-delete-icon {
+  background-color: transparent;
+  padding: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+    background-color: hsl(310, 64%, 74%);
+    border-radius: 1.5em;
+  }
+}
+
+app-edit-pencil-icon {
+  background-color: transparent;
+  padding: 0.5em;
+
+  &:hover {
+    cursor: pointer;
+    background-color: hsl(129, 74%, 74%);
+    border-radius: 1.5em;
+  }
+}

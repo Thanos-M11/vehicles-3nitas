@@ -10,6 +10,8 @@ import { EuroPipe } from './euro.pipe';
 import { UnitPipe } from './unit.pipe';
 import { RecordDatePipe } from './record-date.pipe';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
+import { DeleteIconComponent } from '../shared/icons/delete-icon/delete-icon.component';
+import { EditPencilIconComponent } from '../shared/icons/edit-pencil-icon/edit-pencil-icon.component';
 
 @Component({
   selector: 'app-records',
@@ -23,6 +25,8 @@ import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-sp
     RecordDatePipe,
     DatePipe,
     ProgressSpinnerComponent,
+    DeleteIconComponent,
+    EditPencilIconComponent,
   ],
   templateUrl: './records.component.html',
   styleUrl: './records.component.css',
@@ -62,5 +66,15 @@ export class RecordsComponent implements OnInit {
       this.dataSource.data = records || [];
     });
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
+  }
+
+  onEdit(elementId: string) {
+    console.log(elementId);
+    // TODO
+  }
+
+  onDelete(serialNumber: string) {
+    console.log(serialNumber);
+    // TODO
   }
 }

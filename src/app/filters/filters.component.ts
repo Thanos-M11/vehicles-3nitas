@@ -19,7 +19,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { DriverState } from '../drivers/drivers.model';
 import { Vehicle } from '../vehicles/vehicles.model';
 import { combineLatest } from 'rxjs';
-import { MagnifierIconComponent } from '../shared/magnifier-icon/magnifier-icon.component';
+import { MagnifierIconComponent } from '../shared/icons/magnifier-icon/magnifier-icon.component';
 
 @Component({
   selector: 'app-filters',

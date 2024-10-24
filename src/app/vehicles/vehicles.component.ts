@@ -6,8 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { FilterService } from '../services/filter.service';
 import { Filter } from '../filters/filter.model';
 import { MatListModule } from '@angular/material/list';
-import { TruckIconComponent } from '../shared/truck-icon/truck-icon.component';
-import { MagnifierIconComponent } from '../shared/magnifier-icon/magnifier-icon.component';
+import { TruckIconComponent } from '../shared/icons/truck-icon/truck-icon.component';
+import { MagnifierIconComponent } from '../shared/icons/magnifier-icon/magnifier-icon.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
@@ -37,6 +37,7 @@ export class VehiclesComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
 
+  public truckIconClass: string = 'green';
   public vehicles!: VehicleState;
   public enteredPlate = '';
   public filter!: Filter;

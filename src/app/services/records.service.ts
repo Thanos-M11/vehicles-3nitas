@@ -22,6 +22,7 @@ export class RecordsService {
     'registrationAmount',
     'consumptionAmount',
     'rewardAmount',
+    'actions',
   ];
 
   sharedPaginationService = inject(SharedPaginationService);
@@ -29,6 +30,10 @@ export class RecordsService {
   setIsLoading(value: boolean): void {
     this.isLoadingSubject.next(value);
   }
+
+  removeRecords(serialNumber: string) {}
+  editRecord(serialNumber: string) {}
+  addRecord(newRecord: Record) {}
 
   loadRecords$(filter: Filter): Observable<Record[] | []> {
     this.setIsLoading(true);
