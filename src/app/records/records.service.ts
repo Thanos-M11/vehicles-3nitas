@@ -25,6 +25,7 @@ export class RecordsService {
   private jsonUrl = 'data/records.json';
   private sharedPaginationService = inject(SharedPaginationService);
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  private deletedRecords: string[] = [];
 
   public isLoading$ = this.isLoadingSubject.asObservable();
   public displayedColumns = displayedColumns;
@@ -40,6 +41,10 @@ export class RecordsService {
       'Something went wrong fetching records',
       filter
     );
+  }
+
+  softRemoveRecord(recordSerialNumber: string): void {
+    this.deletedRecords.push(recordSerialNumber);
   }
 
   private fetchRecords(

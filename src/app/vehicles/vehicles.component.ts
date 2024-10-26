@@ -7,12 +7,13 @@ import { FilterService } from '../filters/filter.service';
 import { Filter } from '../filters/filter.model';
 import { MatListModule } from '@angular/material/list';
 import { TruckIconComponent } from '../shared/icons/truck-icon/truck-icon.component';
-import { MagnifierIconComponent } from '../shared/icons/magnifier-icon/magnifier-icon.component';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-vehicles',
@@ -24,9 +25,9 @@ import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-sp
     MatFormFieldModule,
     MatInputModule,
     TruckIconComponent,
-    MagnifierIconComponent,
     AsyncPipe,
     ProgressSpinnerComponent,
+    MatIconModule,
   ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',

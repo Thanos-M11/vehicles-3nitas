@@ -8,11 +8,11 @@ import { EuroPipe } from './euro.pipe';
 import { UnitPipe } from './unit.pipe';
 import { RecordIssueDatePipe } from './record-issue-date.pipe';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
-import { DeleteIconComponent } from '../shared/icons/delete-icon/delete-icon.component';
-import { EditPencilIconComponent } from '../shared/icons/edit-pencil-icon/edit-pencil-icon.component';
+
 import { RecordsService } from './records.service';
 import { PaginatorService } from '../paginator/paginator.service';
 import { ApprovedPipe } from './approved.pipe';
+import { ActionsComponent } from './actions/actions.component';
 
 @Component({
   selector: 'app-records',
@@ -27,8 +27,7 @@ import { ApprovedPipe } from './approved.pipe';
     DatePipe,
     ApprovedPipe,
     ProgressSpinnerComponent,
-    DeleteIconComponent,
-    EditPencilIconComponent,
+    ActionsComponent,
   ],
   templateUrl: './records.component.html',
   styleUrl: './records.component.css',
@@ -68,15 +67,5 @@ export class RecordsComponent implements OnInit {
       this.dataSource.data = records || [];
     });
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
-  }
-
-  onEdit(elementId: string) {
-    console.log(elementId);
-    // TODO
-  }
-
-  onDelete(serialNumber: string) {
-    console.log(serialNumber);
-    // TODO
   }
 }
