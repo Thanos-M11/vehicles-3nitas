@@ -6,39 +6,36 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { SharedPaginationService } from '../paginator/shared-pagination.service';
 
+const displayedColumns = [
+  'serialNumber',
+  'fullName',
+  'issueDate',
+  'isApproved',
+  'tierAmount',
+  'registrationAmount',
+  'consumptionAmount',
+  'rewardAmount',
+  'actions',
+];
+
 @Injectable({ providedIn: 'root' })
 export class RecordsService {
   private httpClient = inject(HttpClient);
+  private jsonUrl = 'data/records.json';
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
+  private sharedPaginationService = inject(SharedPaginationService);
 
   public isLoading$ = this.isLoadingSubject.asObservable();
-
-  public displayedColumns = [
-    'serialNumber',
-    'fullName',
-    'issueDate',
-    'isApproved',
-    'tierAmount',
-    'registrationAmount',
-    'consumptionAmount',
-    'rewardAmount',
-    'actions',
-  ];
-
-  sharedPaginationService = inject(SharedPaginationService);
+  public displayedColumns = displayedColumns;
 
   setIsLoading(value: boolean): void {
     this.isLoadingSubject.next(value);
   }
 
-  removeRecords(serialNumber: string) {}
-  editRecord(serialNumber: string) {}
-  addRecord(newRecord: Record) {}
-
   loadRecords$(filter: Filter): Observable<Record[] | []> {
     this.setIsLoading(true);
     return this.fetchRecords(
-      'http://localhost:3000/records',
+      this.jsonUrl,
       'Something went wrong fetching records',
       filter
     );
@@ -49,9 +46,9 @@ export class RecordsService {
     errorMessage: string,
     filter: Filter
   ): Observable<Record[] | []> {
-    return this.httpClient.get<{ records: Record[] }>(url).pipe(
+    return this.httpClient.get<Record[]>(url).pipe(
       map((resData) => {
-        let records = resData.records;
+        let records = resData;
 
         if (filter) {
           const filterConditions = [
