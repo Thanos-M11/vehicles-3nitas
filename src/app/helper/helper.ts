@@ -1,4 +1,4 @@
-export function formatDate(dateString: string): Date {
+export function formatIssueDate(dateString: string): Date {
   // console.log(dateString);
   const cleanedDate = dateString.trim();
   const year = cleanedDate.slice(0, 4);

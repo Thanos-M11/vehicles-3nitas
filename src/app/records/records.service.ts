@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { Record, RecordState } from '../records/records.model';
-import { Filter, FilterCondition } from '../filters/filter.model';
-import { formatDate } from '../helper/helper';
+import { Record } from '../records/records.model';
+import { Filter } from '../filters/filter.model';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { SharedPaginationService } from '../paginator/shared-pagination.service';

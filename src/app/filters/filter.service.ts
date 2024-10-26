@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Filter, FilterCondition } from './filter.model';
 import { BehaviorSubject } from 'rxjs';
 import { Record } from '../records/records.model';
-import { formatDate } from '../helper/helper';
+import { formatIssueDate } from '../helper/helper';
 
 @Injectable({ providedIn: 'root' })
 export class FilterService {
@@ -62,13 +62,14 @@ export class FilterService {
 
       filter.startDate
         ? (record: Record) =>
-            formatDate(record.issueDate).getTime() >=
+            formatIssueDate(record.issueDate).getTime() >=
             filter.startDate!.getTime()
         : null,
 
       filter.endDate
         ? (record: Record) =>
-            formatDate(record.issueDate).getTime() <= filter.endDate!.getTime()
+            formatIssueDate(record.issueDate).getTime() <=
+            filter.endDate!.getTime()
         : null,
 
       filter.driverId

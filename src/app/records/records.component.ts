@@ -6,7 +6,7 @@ import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { EuroPipe } from './euro.pipe';
 import { UnitPipe } from './unit.pipe';
-import { RecordDatePipe } from './record-date.pipe';
+import { RecordIssueDatePipe } from './record-issue-date.pipe';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
 import { DeleteIconComponent } from '../shared/icons/delete-icon/delete-icon.component';
 import { EditPencilIconComponent } from '../shared/icons/edit-pencil-icon/edit-pencil-icon.component';
@@ -23,7 +23,7 @@ import { ApprovedPipe } from './approved.pipe';
     EuroPipe,
     UnitPipe,
     DecimalPipe,
-    RecordDatePipe,
+    RecordIssueDatePipe,
     DatePipe,
     ApprovedPipe,
     ProgressSpinnerComponent,
