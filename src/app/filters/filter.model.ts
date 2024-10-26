@@ -1,3 +1,5 @@
+import { Record } from '../records/records.model';
+
 export interface Filter {
   serialNumber?: string;
   driverId?: number;
@@ -6,3 +8,5 @@ export interface Filter {
   isApproved?: string;
   plate?: string;
 }
+
+export type FilterCondition = ((record: Record) => boolean) | null;

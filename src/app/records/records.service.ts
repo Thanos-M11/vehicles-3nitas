@@ -1,10 +1,11 @@
 import { inject, Injectable } from '@angular/core';
 import { Record, RecordState } from '../records/records.model';
-import { Filter } from '../filters/filter.model';
+import { Filter, FilterCondition } from '../filters/filter.model';
 import { formatDate } from '../helper/helper';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { SharedPaginationService } from '../paginator/shared-pagination.service';
+import { FilterService } from '../filters/filter.service';
 
 const displayedColumns = [
   'serialNumber',
@@ -21,9 +22,10 @@ const displayedColumns = [
 @Injectable({ providedIn: 'root' })
 export class RecordsService {
   private httpClient = inject(HttpClient);
+  private filterSerice = inject(FilterService);
   private jsonUrl = 'data/records.json';
-  private isLoadingSubject = new BehaviorSubject<boolean>(false);
   private sharedPaginationService = inject(SharedPaginationService);
+  private isLoadingSubject = new BehaviorSubject<boolean>(false);
 
   public isLoading$ = this.isLoadingSubject.asObservable();
   public displayedColumns = displayedColumns;
@@ -49,41 +51,9 @@ export class RecordsService {
     return this.httpClient.get<Record[]>(url).pipe(
       map((resData) => {
         let records = resData;
-
         if (filter) {
-          const filterConditions = [
-            filter.serialNumber
-              ? (record: Record) => record.serialNumber === filter.serialNumber
-              : null,
-
-            filter.startDate
-              ? (record: Record) =>
-                  formatDate(record.issueDate).getTime() >=
-                  filter.startDate!.getTime()
-              : null,
-
-            filter.endDate
-              ? (record: Record) =>
-                  formatDate(record.issueDate).getTime() <=
-                  filter.endDate!.getTime()
-              : null,
-
-            filter.driverId
-              ? (record: Record) => record.driverId === filter.driverId
-              : null,
-
-            filter.isApproved === '0'
-              ? (record: Record) => record.isApproved === false
-              : filter.isApproved === '1'
-              ? (record: Record) => record.isApproved === true
-              : null,
-
-            filter.plate
-              ? (record: Record) => record.plate === filter.plate
-              : null,
-          ];
-
-          // applying conditions
+          const filterConditions =
+            this.filterSerice.getFilterConditions(filter);
           for (const condition of filterConditions) {
             if (condition) {
               records = records.filter(condition);
@@ -91,7 +61,7 @@ export class RecordsService {
           }
         }
 
-        this.updateTotalPages(records.length);
+        this.sharedPaginationService.setLength(records.length);
         this.setIsLoading(false);
         return records;
       }),
@@ -100,9 +70,5 @@ export class RecordsService {
         return throwError(() => new Error(error.message));
       })
     );
-  }
-
-  private updateTotalPages(length: number): void {
-    this.sharedPaginationService.setLength(length);
   }
 }

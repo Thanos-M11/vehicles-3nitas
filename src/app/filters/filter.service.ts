@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Filter } from './filter.model';
+import { Filter, FilterCondition } from './filter.model';
 import { BehaviorSubject } from 'rxjs';
+import { Record } from '../records/records.model';
+import { formatDate } from '../helper/helper';
 
 @Injectable({ providedIn: 'root' })
 export class FilterService {
@@ -50,5 +52,37 @@ export class FilterService {
       plate: undefined,
     });
     this.setFilterOff();
+  }
+
+  getFilterConditions(filter: Filter): FilterCondition[] {
+    const filterConditions = [
+      filter.serialNumber
+        ? (record: Record) => record.serialNumber === filter.serialNumber
+        : null,
+
+      filter.startDate
+        ? (record: Record) =>
+            formatDate(record.issueDate).getTime() >=
+            filter.startDate!.getTime()
+        : null,
+
+      filter.endDate
+        ? (record: Record) =>
+            formatDate(record.issueDate).getTime() <= filter.endDate!.getTime()
+        : null,
+
+      filter.driverId
+        ? (record: Record) => record.driverId === filter.driverId
+        : null,
+
+      filter.isApproved === '0'
+        ? (record: Record) => record.isApproved === false
+        : filter.isApproved === '1'
+        ? (record: Record) => record.isApproved === true
+        : null,
+
+      filter.plate ? (record: Record) => record.plate === filter.plate : null,
+    ];
+    return filterConditions;
   }
 }
