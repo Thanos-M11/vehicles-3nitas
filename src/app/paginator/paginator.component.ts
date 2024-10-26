@@ -5,8 +5,8 @@ import {
   PageEvent,
 } from '@angular/material/paginator';
 import { AsyncPipe } from '@angular/common';
-import { PaginatorService } from '../services/paginator.service';
 import { Observable, Subject } from 'rxjs';
+import { PaginatorService } from './paginator.service';
 
 @Injectable()
 export class CustomPaginatorIntl implements MatPaginatorIntl {

@@ -1,6 +1,6 @@
 import { DestroyRef, Injectable } from '@angular/core';
-import { SharedPaginationService } from './shared-pagination.service';
 import { BehaviorSubject } from 'rxjs';
+import { SharedPaginationService } from './shared-pagination.service';
 
 @Injectable({ providedIn: 'root' })
 export class PaginatorService {

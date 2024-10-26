@@ -1,6 +1,4 @@
-import { PaginatorService } from './../services/paginator.service';
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
-import { RecordsService } from '../services/records.service';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { FilterService } from '../filters/filter.service';
 import { Record } from './records.model';
 import { combineLatest, map, Observable, switchMap } from 'rxjs';
@@ -12,6 +10,8 @@ import { RecordDatePipe } from './record-date.pipe';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
 import { DeleteIconComponent } from '../shared/icons/delete-icon/delete-icon.component';
 import { EditPencilIconComponent } from '../shared/icons/edit-pencil-icon/edit-pencil-icon.component';
+import { RecordsService } from './records.service';
+import { PaginatorService } from '../paginator/paginator.service';
 
 @Component({
   selector: 'app-records',
