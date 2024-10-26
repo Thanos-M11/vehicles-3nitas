@@ -30,7 +30,7 @@
       mat-cell
       *matCellDef="let element"
     >
-      @if(element.isApproved){ Εγκεκριμένο }@else { Ακυρωμένο }
+      {{ element.isApproved | approved }}
     </td>
   </ng-container>
 

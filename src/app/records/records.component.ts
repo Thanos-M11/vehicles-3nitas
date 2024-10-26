@@ -12,6 +12,7 @@ import { DeleteIconComponent } from '../shared/icons/delete-icon/delete-icon.com
 import { EditPencilIconComponent } from '../shared/icons/edit-pencil-icon/edit-pencil-icon.component';
 import { RecordsService } from './records.service';
 import { PaginatorService } from '../paginator/paginator.service';
+import { ApprovedPipe } from './approved.pipe';
 
 @Component({
   selector: 'app-records',
@@ -24,6 +25,7 @@ import { PaginatorService } from '../paginator/paginator.service';
     DecimalPipe,
     RecordDatePipe,
     DatePipe,
+    ApprovedPipe,
     ProgressSpinnerComponent,
     DeleteIconComponent,
     EditPencilIconComponent,
