@@ -1,23 +1,17 @@
 import { inject, Injectable } from '@angular/core';
 
 import { Vehicle, VehicleState } from './vehicles.model';
-import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class VehiclesService {
   private httpClient = inject(HttpClient);
+  private jsonUrl = 'data/vehicles.json';
   private vehicles: VehicleState = [];
   private selectedVehicleSubject = new BehaviorSubject<Vehicle | null>(null);
 
   selectedVehicle$ = this.selectedVehicleSubject.asObservable();
-
-  loadVehicles$() {
-    return this.fetchVehicles(
-      'http://localhost:3000/vehicles',
-      'Something went wrong fetching vehicles'
-    );
-  }
 
   setSelectedVehicle(plate: string): void {
     this.selectedVehicleSubject.next(
@@ -25,9 +19,18 @@ export class VehiclesService {
     );
   }
 
-  private fetchVehicles(url: string, errorMessage: string) {
-    return this.httpClient.get<{ vehicles: Vehicle[] }>(url).pipe(
-      map((resData) => resData.vehicles),
+  loadVehicles$(): Observable<Vehicle[]> {
+    return this.fetchVehicles(
+      this.jsonUrl,
+      'Something went wrong fetching vehicles'
+    );
+  }
+
+  private fetchVehicles(
+    url: string,
+    errorMessage: string
+  ): Observable<Vehicle[]> {
+    return this.httpClient.get<Vehicle[]>(url).pipe(
       catchError((error) => {
         console.log(error);
         return throwError(() => new Error(errorMessage));
