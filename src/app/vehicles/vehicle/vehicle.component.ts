@@ -1,6 +1,6 @@
 import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
-import { VehiclesService } from '../../services/vehicle.service';
-import { FilterService } from '../../services/filter.service';
+import { VehiclesService } from '../vehicle.service';
+import { FilterService } from '../../filters/filter.service';
 import { Filter } from '../../filters/filter.model';
 import { TruckIconComponent } from '../../shared/icons/truck-icon/truck-icon.component';
 import { PaginatorService } from '../../services/paginator.service';

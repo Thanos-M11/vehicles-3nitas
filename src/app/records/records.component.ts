@@ -1,7 +1,7 @@
 import { PaginatorService } from './../services/paginator.service';
 import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
 import { RecordsService } from '../services/records.service';
-import { FilterService } from '../services/filter.service';
+import { FilterService } from '../filters/filter.service';
 import { Record } from './records.model';
 import { combineLatest, map, Observable, switchMap } from 'rxjs';
 import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';

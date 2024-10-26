@@ -2,7 +2,7 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Driver } from './drivers.model';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { DriversService } from '../services/driver.service';
+import { DriversService } from './driver.service';
 
 @Component({
   selector: 'app-drivers',

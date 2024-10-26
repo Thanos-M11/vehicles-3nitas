@@ -1,8 +1,8 @@
 import { Component, DestroyRef, OnInit } from '@angular/core';
 import { Vehicle } from '../vehicles/vehicles.model';
-import { VehiclesService } from '../services/vehicle.service';
+import { VehiclesService } from '../vehicles/vehicle.service';
 import { Observable } from 'rxjs';
-import { FilterService } from '../services/filter.service';
+import { FilterService } from '../filters/filter.service';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
 

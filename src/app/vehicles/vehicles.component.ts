@@ -1,9 +1,9 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleState } from './vehicles.model';
-import { VehiclesService } from '../services/vehicle.service';
+import { VehiclesService } from './vehicle.service';
 import { FormsModule } from '@angular/forms';
-import { FilterService } from '../services/filter.service';
+import { FilterService } from '../filters/filter.service';
 import { Filter } from '../filters/filter.model';
 import { MatListModule } from '@angular/material/list';
 import { TruckIconComponent } from '../shared/icons/truck-icon/truck-icon.component';

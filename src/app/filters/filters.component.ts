@@ -7,9 +7,9 @@ import {
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Filter } from './filter.model';
-import { FilterService } from '../services/filter.service';
-import { DriversService } from '../services/driver.service';
-import { VehiclesService } from '../services/vehicle.service';
+import { FilterService } from './filter.service';
+import { DriversService } from '../drivers/driver.service';
+import { VehiclesService } from '../vehicles/vehicle.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';

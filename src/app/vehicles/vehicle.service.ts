@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 
-import { Vehicle, VehicleState } from '../vehicles/vehicles.model';
+import { Vehicle, VehicleState } from './vehicles.model';
 import { BehaviorSubject, catchError, map, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 
