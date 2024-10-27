@@ -12,3 +12,5 @@ export interface Record {
 }
 
 export type RecordState = Record[];
+
+export type RemovedRecords = { [key: string]: boolean };
