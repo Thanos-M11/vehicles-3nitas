@@ -46,6 +46,19 @@ export class RecordsService {
     this.isLoadingSubject.next(value);
   }
 
+  getRecordBySerialNumber$(serialNumber: string): Observable<Record | null> {
+    return this.httpClient.get<Record[]>(this.jsonUrl).pipe(
+      map(
+        (records: Record[]) =>
+          records.find((record) => record.serialNumber === serialNumber) || null
+      ),
+      catchError((error) => {
+        console.log(error);
+        return throwError(() => new Error(error.message));
+      })
+    );
+  }
+
   loadRecords$(filter: Filter): Observable<Record[] | []> {
     this.setIsLoading(true);
     return this.fetchRecords(

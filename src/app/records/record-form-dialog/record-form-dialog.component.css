@@ -1,0 +1,28 @@
+form {
+  padding: 2em;
+  margin: 0 auto;
+  width: 35vw;
+}
+
+h2 {
+  margin-bottom: 1em;
+}
+
+mat-form-field {
+  margin-right: 0.5em;
+}
+
+mat-dialog-actions {
+  width: 95%;
+}
+
+mat-dialog-content:nth-child(n + 2) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 1em;
+}
+
+mat-form-field {
+  width: 225px;
+  margin-top: 1em;
+}

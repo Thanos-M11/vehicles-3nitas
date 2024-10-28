@@ -4,16 +4,19 @@ import { BehaviorSubject } from 'rxjs';
 import { Record } from '../records/records.model';
 import { formatIssueDate } from '../helper/helper';
 
+const initialFilterState = {
+  serialNumber: '',
+  startDate: undefined,
+  endDate: undefined,
+  driverId: undefined,
+  isApproved: undefined,
+  plate: undefined,
+};
+
 @Injectable({ providedIn: 'root' })
 export class FilterService {
-  private filterSubject = new BehaviorSubject<Filter>({
-    serialNumber: '',
-    startDate: undefined,
-    endDate: undefined,
-    driverId: undefined,
-    isApproved: undefined,
-    plate: undefined,
-  });
+  public initialFilterState = initialFilterState;
+  private filterSubject = new BehaviorSubject<Filter>(initialFilterState);
 
   private filterIsActiveSubject = new BehaviorSubject<boolean>(false);
 
@@ -43,14 +46,7 @@ export class FilterService {
   }
 
   clearFilter() {
-    this.filterSubject.next({
-      serialNumber: '',
-      startDate: undefined,
-      endDate: undefined,
-      driverId: undefined,
-      isApproved: undefined,
-      plate: undefined,
-    });
+    this.filterSubject.next(this.initialFilterState);
     this.setFilterOff();
   }
 
