@@ -1,10 +1,11 @@
-import { Component, DestroyRef, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { Vehicle } from '../vehicles/vehicles.model';
 import { VehiclesService } from '../vehicles/vehicle.service';
 import { Observable } from 'rxjs';
 import { FilterService } from '../filters/filter.service';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbar } from '@angular/material/toolbar';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-toolbar',
@@ -14,22 +15,11 @@ import { MatToolbar } from '@angular/material/toolbar';
   styleUrl: './toolbar.component.css',
 })
 export class ToolbarComponent implements OnInit {
-  selectedVehicle!: Vehicle | null;
-  filterIsActive$!: Observable<boolean>;
+  selectedPlate!: string | null;
+  filterService = inject(FilterService);
+  filter = toSignal(this.filterService.filter$);
 
-  constructor(
-    private vehiclesService: VehiclesService,
-    private destroyRef: DestroyRef,
-    private filterService: FilterService
-  ) {
-    this.filterIsActive$ = this.filterService.filterIsActive$;
-  }
+  constructor() {}
 
-  ngOnInit() {
-    const subscription = this.vehiclesService.selectedVehicle$.subscribe({
-      next: (vehicle) => (this.selectedVehicle = vehicle),
-    });
-
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
-  }
+  ngOnInit() {}
 }

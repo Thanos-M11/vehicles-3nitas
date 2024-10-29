@@ -1,5 +1,6 @@
-h2 {
+span {
   color: hsl(129, 34%, 34%);
+  font-weight: 500;
 }
 
 mat-toolbar {
