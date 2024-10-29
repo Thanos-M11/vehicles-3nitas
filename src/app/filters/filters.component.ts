@@ -20,6 +20,7 @@ import { DriverState } from '../drivers/drivers.model';
 import { Vehicle } from '../vehicles/vehicles.model';
 import { combineLatest } from 'rxjs';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-filters',
@@ -32,6 +33,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatInput,
     MatDatepickerModule,
     MatIconModule,
+    RouterLink,
   ],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
