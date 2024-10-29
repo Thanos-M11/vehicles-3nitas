@@ -14,6 +14,9 @@ import { BehaviorSubject, combineLatest } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
 import { MatIconModule } from '@angular/material/icon';
+import { RouterLink } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
 
 @Component({
   selector: 'app-vehicles',
@@ -24,10 +27,13 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
     TruckIconComponent,
     AsyncPipe,
     ProgressSpinnerComponent,
-    MatIconModule,
+    RouterLink,
   ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',
@@ -62,12 +68,21 @@ export class VehiclesComponent implements OnInit {
     this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
-  handleEnteredPlate() {
+  onSubmit() {
     this.vehiclesService.setSelectedVehicle(this.enteredPlate);
 
     this.filterService.setFilter({
       ...this.filter,
       plate: this.enteredPlate,
+    });
+    this.enteredPlate = '';
+  }
+
+  onCancel() {
+    this.vehiclesService.setSelectedVehicle('');
+    this.filterService.setFilter({
+      ...this.filter,
+      plate: '',
     });
     this.enteredPlate = '';
   }

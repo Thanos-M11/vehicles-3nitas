@@ -5,22 +5,44 @@
       <h2>Ενεργά Οχήματα</h2>
     </section>
 
-    <section class="plate-input">
-      <mat-icon
-        aria-hidden="false"
-        aria-label="search icon"
-        fontIcon="search"
-      ></mat-icon>
-      <mat-form-field appearance="outline">
-        <mat-label>Αναζήτηση πινακίδας</mat-label>
+    <form (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="fill">
+        <mat-label class="">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="search icon"
+            fontIcon="search"
+          ></mat-icon>
+          <span>Αριθμός Πινακίδας</span>
+        </mat-label>
         <input
           matInput
+          id="plate"
+          name="plate"
+          type="text"
           [(ngModel)]="enteredPlate"
-          (blur)="handleEnteredPlate()"
         />
       </mat-form-field>
-    </section>
+      <section class="btn-bar">
+        <a
+          mat-raised-button
+          type="button"
+          [routerLink]="['/records']"
+          (click)="onCancel()"
+          >Ακύρωση</a
+        >
+        <button
+          mat-raised-button
+          type="submit"
+          [routerLink]="['/records', enteredPlate]"
+        >
+          Αναζήτηση
+        </button>
+      </section>
+    </form>
   </section>
+
+  <mat-divider></mat-divider>
 
   @if(isLoading$ | async){
   <app-progress-spinner diameter="50" />
