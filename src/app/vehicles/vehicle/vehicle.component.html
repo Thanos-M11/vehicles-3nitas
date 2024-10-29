@@ -1,8 +1,8 @@
-<section
-  id="vehicle-plate"
-  [class.selected]="plate === filter.plate"
+<a
+  [routerLink]="['records/', plate]"
+  routerLinkActive="selected"
   (click)="onSelectVehicle(plate)"
 >
   <app-truck-icon />
   <p>{{ plate }}</p>
-</section>
+</a>

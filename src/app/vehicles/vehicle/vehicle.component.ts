@@ -5,11 +5,17 @@ import { Filter } from '../../filters/filter.model';
 import { TruckIconComponent } from '../../shared/icons/truck-icon/truck-icon.component';
 import { ThreeDotsIconComponent } from '../../shared/icons/three-dots-icon/three-dots-icon.component';
 import { PaginatorService } from '../../paginator/paginator.service';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle',
   standalone: true,
-  imports: [TruckIconComponent, ThreeDotsIconComponent],
+  imports: [
+    TruckIconComponent,
+    ThreeDotsIconComponent,
+    RouterLink,
+    RouterLinkActive,
+  ],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })
