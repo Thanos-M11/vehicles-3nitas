@@ -13,3 +13,7 @@ fieldset {
   border: none;
   margin-bottom: 1em;
 }
+
+button {
+  margin: 0 1rem;
+}
