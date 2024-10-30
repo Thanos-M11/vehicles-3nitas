@@ -10,31 +10,17 @@ import { Filter } from './filter.model';
 import { FilterService } from './filter.service';
 import { DriversService } from '../drivers/driver.service';
 import { VehiclesService } from '../vehicles/vehicle.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
-import { MatInput } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { DriverState } from '../drivers/drivers.model';
 import { Vehicle } from '../vehicles/vehicles.model';
 import { combineLatest } from 'rxjs';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
+import { MaterialModule } from '../material/material.module';
 
 @Component({
   selector: 'app-filters',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatInput,
-    MatDatepickerModule,
-    MatIconModule,
-    RouterLink,
-  ],
+  imports: [ReactiveFormsModule, RouterLink, MaterialModule],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
   providers: [provideNativeDateAdapter()],

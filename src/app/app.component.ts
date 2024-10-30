@@ -9,6 +9,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { PaginatorComponent } from './paginator/paginator.component';
+import { MaterialModule } from './material/material.module';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +21,8 @@ import { PaginatorComponent } from './paginator/paginator.component';
     FiltersComponent,
     ToolbarComponent,
     RecordsComponent,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
     PaginatorComponent,
+    MaterialModule,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',

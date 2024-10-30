@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
+import { MaterialModule } from '../material/material.module';
 
 @Component({
   selector: 'app-vehicles',
@@ -24,12 +25,7 @@ import { MatDividerModule } from '@angular/material/divider';
   imports: [
     VehicleComponent,
     FormsModule,
-    MatListModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
+    MaterialModule,
     TruckIconComponent,
     AsyncPipe,
     ProgressSpinnerComponent,
