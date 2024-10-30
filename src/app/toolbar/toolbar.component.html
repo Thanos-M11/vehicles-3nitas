@@ -1,4 +1,12 @@
 <mat-toolbar>
+  <button
+    mat-mini-fab
+    (click)="sidenavToggle()"
+    matTooltip="Μενού οχημάτων - Ενναλαγή"
+    aria-label="Button that displays a tooltip when focused or hovered over"
+  >
+    <mat-icon color="primary">menu</mat-icon>
+  </button>
   @if(filter()?.plate){
   <span>{{ filter()?.plate }}</span>
   }@else {

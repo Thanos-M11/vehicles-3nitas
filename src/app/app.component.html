@@ -1,11 +1,11 @@
 <main>
-  <mat-sidenav-container class="sidenav-container">
-    <mat-sidenav mode="side" opened>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" #sidenav [(opened)]="opened">
       <app-vehicles />
     </mat-sidenav>
 
     <mat-sidenav-content>
-      <app-toolbar />
+      <app-toolbar [sidenavToggle]="sidenav.toggle.bind(sidenav)" />
       <section>
         <app-filters />
         <router-outlet> </router-outlet>
@@ -14,3 +14,15 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </main>
+
+<!-- 
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">Side Nav</mat-sidenav>
+  <mat-sidenav-content
+    >Main
+    <button mat-fab (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->

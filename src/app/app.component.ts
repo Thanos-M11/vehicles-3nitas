@@ -5,11 +5,10 @@ import { VehicleComponent } from './vehicles/vehicle/vehicle.component';
 import { FiltersComponent } from './filters/filters.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { RecordsComponent } from './records/records.component';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatListModule } from '@angular/material/list';
-import { MatIconModule } from '@angular/material/icon';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { MaterialModule } from './material/material.module';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +21,7 @@ import { MaterialModule } from './material/material.module';
     ToolbarComponent,
     RecordsComponent,
     PaginatorComponent,
+    MatToolbarModule,
     MaterialModule,
   ],
   templateUrl: './app.component.html',
@@ -29,4 +29,5 @@ import { MaterialModule } from './material/material.module';
 })
 export class AppComponent {
   title = 'vehicles';
+  opened = true;
 }
