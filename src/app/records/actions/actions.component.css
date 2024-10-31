@@ -1,8 +1,0 @@
-mat-icon {
-  height: 100%;
-  margin-right: 0.5em;
-  &:hover {
-    background-color: lightgray;
-    cursor: pointer;
-  }
-}

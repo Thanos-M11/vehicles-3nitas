@@ -5,11 +5,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { RecordFormDialogComponent } from '../record-form-dialog/record-form-dialog.component';
 import { Record } from '../records.model';
 import { tap } from 'rxjs';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-actions',
   standalone: true,
-  imports: [MatIconModule],
+  imports: [MatIconModule, MatButtonModule],
   templateUrl: './actions.component.html',
   styleUrl: './actions.component.css',
 })
