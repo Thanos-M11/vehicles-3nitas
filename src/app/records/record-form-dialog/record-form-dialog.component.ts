@@ -7,48 +7,34 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import {
   MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
+  MatDialogModule,
   MatDialogRef,
-  MatDialogTitle,
 } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { RecordsService } from '../records.service';
 import { RecordIssueDatePipe } from '../record-issue-date.pipe';
 import { DatePipe } from '@angular/common';
 import { Record } from '../records.model';
-import { MatSelectModule } from '@angular/material/select';
 import { DriversService } from '../../drivers/driver.service';
-import { toSignal } from '@angular/core/rxjs-interop';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Driver } from '../../drivers/drivers.model';
 import { ApprovedPipe } from '../approved.pipe';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { formatIssueDate } from '../../helper/helper';
+import { MaterialModule } from '../../material/material.module';
 
 @Component({
   selector: 'app-record-form-dialog',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
     FormsModule,
-    MatButtonModule,
-    MatDialogTitle,
-    MatDialogContent,
-    MatDialogActions,
-    MatDialogClose,
+    MaterialModule,
+    MatDialogModule,
     RecordIssueDatePipe,
     DatePipe,
     ApprovedPipe,
-    MatDatepickerModule,
   ],
   templateUrl: './record-form-dialog.component.html',
   styleUrl: './record-form-dialog.component.css',
@@ -65,38 +51,45 @@ export class RecordFormDialogComponent implements OnInit {
   statusOptions = [true, false];
 
   form = new FormGroup({
-    fullName: new FormControl(),
-    issueDate: new FormControl(),
+    serialNumber: new FormControl({ value: '', disabled: true }),
+    plate: new FormControl({ value: '', disabled: true }),
+    fullName: new FormControl(''),
+    issueDate: new FormControl(''),
     isApproved: new FormControl(),
     tierAmount: new FormControl(0, [Validators.min(0.01), Validators.max(1)]),
-    registrationAmount: new FormControl(),
-    consumptionAmount: new FormControl(),
+    registrationAmount: new FormControl(0),
+    consumptionAmount: new FormControl(0),
+    rewardAmount: new FormControl({ value: 0, disabled: true }),
   });
-  vehicleRecord!: Record | null;
 
   ngOnInit() {
-    const subscription = this.recordsService
+    this.recordsService
       .getRecordBySerialNumber$(this.data.serialNumber)
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (record) => {
           if (record) {
-            this.vehicleRecord = record;
-            this.form.patchValue({
-              fullName: record.fullName,
-              issueDate: formatIssueDate(record.issueDate),
-              isApproved: record.isApproved,
-              tierAmount: record.tierAmount,
-              registrationAmount: record.registrationAmount,
-              consumptionAmount: record.consumptionAmount,
-            });
+            this.formPatchValue(record);
           }
         },
       });
-
-    this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  private formPatchValue(record: Record): void {
+    this.form.patchValue({
+      serialNumber: record.serialNumber,
+      plate: record.plate,
+      fullName: record.fullName,
+      issueDate: record.issueDate,
+      isApproved: record.isApproved,
+      tierAmount: +record.tierAmount,
+      registrationAmount: +record.registrationAmount,
+      consumptionAmount: +record.consumptionAmount,
+      rewardAmount: +record.rewardAmount,
+    });
   }
 }

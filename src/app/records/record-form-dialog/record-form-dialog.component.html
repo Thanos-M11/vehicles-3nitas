@@ -1,9 +1,18 @@
 <form [formGroup]="form">
   <mat-dialog-content>
-    <h2>
-      Σειρά: {{ vehicleRecord?.serialNumber }} / Πινακίδα:
-      {{ vehicleRecord?.plate }}
-    </h2>
+    <h2>#{{ data.serialNumber }}</h2>
+
+    <!-- serial number disabled -->
+    <mat-form-field appearance="outline">
+      <mat-label>Σειρά Αριθμός</mat-label>
+      <input matInput formControlName="serialNumber" />
+    </mat-form-field>
+
+    <!-- plate disabled -->
+    <mat-form-field appearance="outline">
+      <mat-label>Πινακίδα</mat-label>
+      <input matInput formControlName="plate" />
+    </mat-form-field>
 
     <!-- fullName -->
     <mat-form-field>
@@ -57,12 +66,22 @@
       <mat-label>Ποσότητα κατανάλωσης</mat-label>
       <input matInput formControlName="consumptionAmount" />
     </mat-form-field>
+
+    <!-- reward amount -->
+    <!-- <mat-form-field>
+      <mat-label>Ποσό επιβράβευσης</mat-label>
+      <input matInput formControlName="rewardAmount" />
+    </mat-form-field> -->
   </mat-dialog-content>
 
   <!-- dialog buttons -->
   <mat-dialog-actions>
-    <button mat-raised-button (click)="onCancel()">Ακύρωση</button>
-    <button mat-raised-button [mat-dialog-close]="form.value">
+    <button mat-raised-button color="warn" (click)="onCancel()">Ακύρωση</button>
+    <button
+      mat-raised-button
+      color="accent"
+      [mat-dialog-close]="form.getRawValue()"
+    >
       Καταχώρηση αλλαγών
     </button>
   </mat-dialog-actions>

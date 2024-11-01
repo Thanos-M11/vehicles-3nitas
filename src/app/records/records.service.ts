@@ -1,3 +1,4 @@
+import { RecordFormDialogService } from './record-form-dialog/record-form-dialog.service';
 import { inject, Injectable } from '@angular/core';
 import { Record, RemovedRecords } from '../records/records.model';
 import { Filter } from '../filters/filter.model';
@@ -32,11 +33,13 @@ export class RecordsService {
   private filterSerice = inject(FilterService);
   private jsonUrl = 'data/records.json';
   private sharedPaginationService = inject(SharedPaginationService);
+  private recordFormDialogService = inject(RecordFormDialogService);
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   private removedRecordsSubject = new BehaviorSubject<RemovedRecords>({
     // '23491': true,
     // '23403': true,
   });
+  private updatedRecords$ = this.recordFormDialogService.updatedRecordsHash$;
 
   public isLoading$ = this.isLoadingSubject.asObservable();
   public displayedColumns = displayedColumns;
@@ -85,8 +88,9 @@ export class RecordsService {
       this.httpClient.get<Record[]>(url),
       of(this.filterSerice.getFilterConditions(filter)),
       this.removedRecords$,
+      this.updatedRecords$,
     ]).pipe(
-      map(([resData, filterConditions, removedRecords]) => {
+      map(([resData, filterConditions, removedRecords, updatedRecords]) => {
         let records = resData;
 
         // apply main filter on records
@@ -103,6 +107,17 @@ export class RecordsService {
           records = records.filter(
             (record) => removedRecords[record.serialNumber] !== true
           );
+        }
+
+        // apply changes from updated records
+        if (Object.keys(updatedRecords)) {
+          records = records.map((record) => {
+            if (updatedRecords[record.serialNumber]) {
+              console.log(updatedRecords[record.serialNumber]);
+              return updatedRecords[record.serialNumber];
+            }
+            return record;
+          });
         }
 
         // update records length on paginator

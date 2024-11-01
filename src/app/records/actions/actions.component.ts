@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject, Input, DestroyRef } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { RecordsService } from '../records.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -6,6 +6,8 @@ import { RecordFormDialogComponent } from '../record-form-dialog/record-form-dia
 import { Record } from '../records.model';
 import { tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
+import { RecordFormDialogService } from '../record-form-dialog/record-form-dialog.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-actions',
@@ -18,21 +20,26 @@ export class ActionsComponent {
   @Input({ required: true }) vehicleSerialNumber!: string;
   readonly dialog = inject(MatDialog);
   recordService = inject(RecordsService);
-  resultData!: Record | null;
+  recordFormDialogService = inject(RecordFormDialogService);
+  private destroyRef = inject(DestroyRef);
 
   openDialog(): void {
-    // console.log(this.vehicleSerialNumber)
     const dialogRef = this.dialog.open(RecordFormDialogComponent, {
       data: { serialNumber: this.vehicleSerialNumber },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log('dialog closed');
-      if (result !== undefined) {
-        this.resultData = result;
-      }
-      console.log(this.resultData);
-    });
+    dialogRef
+      .afterClosed()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (formRawValue: Record | undefined) => {
+          // console.log('dialog closed');
+          if (formRawValue?.serialNumber) {
+            this.recordFormDialogService.addUpdatedRecord(formRawValue);
+          }
+        },
+        error: (error) => console.log(error.message),
+      });
   }
 
   onDelete(): void {

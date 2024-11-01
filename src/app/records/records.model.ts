@@ -4,7 +4,7 @@ export interface Record {
   driverId: number;
   plate: string;
   issueDate: string;
-  isApproved: boolean;
+  isApproved: boolean | undefined;
   tierAmount: number;
   registrationAmount: number;
   consumptionAmount: number;
