@@ -85,7 +85,7 @@ export class RecordFormDialogComponent implements OnInit {
       plate: record.plate,
       fullName: record.fullName,
       issueDate: record.issueDate,
-      isApproved: record.isApproved,
+      isApproved: Boolean(record.isApproved),
       tierAmount: +record.tierAmount,
       registrationAmount: +record.registrationAmount,
       consumptionAmount: +record.consumptionAmount,

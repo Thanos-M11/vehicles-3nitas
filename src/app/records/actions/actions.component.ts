@@ -4,7 +4,6 @@ import { RecordsService } from '../records.service';
 import { MatDialog } from '@angular/material/dialog';
 import { RecordFormDialogComponent } from '../record-form-dialog/record-form-dialog.component';
 import { Record } from '../records.model';
-import { tap } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { RecordFormDialogService } from '../record-form-dialog/record-form-dialog.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -19,7 +18,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class ActionsComponent {
   @Input({ required: true }) vehicleSerialNumber!: string;
   readonly dialog = inject(MatDialog);
-  recordService = inject(RecordsService);
   recordFormDialogService = inject(RecordFormDialogService);
   private destroyRef = inject(DestroyRef);
 
@@ -43,6 +41,6 @@ export class ActionsComponent {
   }
 
   onDelete(): void {
-    this.recordService.softRemoveRecord(this.vehicleSerialNumber);
+    this.recordFormDialogService.softRemoveRecord(this.vehicleSerialNumber);
   }
 }

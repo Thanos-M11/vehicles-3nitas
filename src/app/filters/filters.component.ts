@@ -81,7 +81,7 @@ export class FiltersComponent implements OnInit {
     };
 
     this.filterService.setFilter(newFilter);
-    console.log(this.form.controls.dateRange.controls);
+    // console.log(this.form.controls.dateRange.controls);
   }
 
   onClearFilter() {

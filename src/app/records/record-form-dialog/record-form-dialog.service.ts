@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Record } from '../records.model';
+import { Record, RemovedRecords } from '../records.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { formatIssueDate } from '../../helper/helper';
 
 @Injectable({ providedIn: 'root' })
 export class RecordFormDialogService {
   private updatedRecordsHashSubject = new BehaviorSubject<{
     [key: string]: Record;
   }>({});
+  private removedRecordsSubject = new BehaviorSubject<RemovedRecords>({});
+
   public updatedRecordsHash$: Observable<{ [key: string]: Record }> =
     this.updatedRecordsHashSubject.asObservable();
+  public removedRecords$ = this.removedRecordsSubject.asObservable();
+
+  private currentHash: { [key: string]: Record } = {};
 
   addUpdatedRecord(record: Record): void {
-    const updatedRecord = {
-      ...record,
-      tierAmount: +record.tierAmount,
-      registrationAmount: +record.registrationAmount,
-      consumptionAmount: +record.consumptionAmount,
-      rewardAmount:
-        Math.round(+record.tierAmount * +record.consumptionAmount * 100) / 100,
-    };
+    this.currentHash[record.serialNumber] = record;
+    this.updatedRecordsHashSubject.next(this.currentHash);
+    // console.log(this.currentHash);
+  }
 
-    const newHash = {
-      [record.serialNumber]: updatedRecord,
+  softRemoveRecord(recordSerialNumber: string): void {
+    const removedRecords: RemovedRecords = {
+      ...this.removedRecordsSubject.getValue(),
+      [recordSerialNumber]: true,
     };
-
-    this.updatedRecordsHashSubject.next(newHash);
-    console.log(newHash);
+    this.removedRecordsSubject.next(removedRecords);
   }
 }
