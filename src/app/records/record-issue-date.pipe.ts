@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { formatIssueDate } from '../helper/helper';
+import { stringToDate } from '../helper/helper';
 
 @Pipe({
   name: 'recordIssueDate',
@@ -7,6 +7,6 @@ import { formatIssueDate } from '../helper/helper';
 })
 export class RecordIssueDatePipe implements PipeTransform {
   transform(value: string): Date {
-    return formatIssueDate(value);
+    return stringToDate(value);
   }
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Filter, FilterCondition } from './filter.model';
 import { BehaviorSubject } from 'rxjs';
 import { Record } from '../records/records.model';
-import { formatIssueDate } from '../helper/helper';
+import { stringToDate } from '../helper/helper';
 
 const initialFilterState = {
   serialNumber: '',
@@ -58,13 +58,13 @@ export class FilterService {
 
       filter.startDate
         ? (record: Record) =>
-            formatIssueDate(record.issueDate).getTime() >=
+            stringToDate(record.issueDate as string).getTime() >=
             filter.startDate!.getTime()
         : null,
 
       filter.endDate
         ? (record: Record) =>
-            formatIssueDate(record.issueDate).getTime() <=
+            stringToDate(record.issueDate as string).getTime() <=
             filter.endDate!.getTime()
         : null,
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Record, RemovedRecords } from '../records.model';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { dateToString, isDate, stringToDate } from '../../helper/helper';
 
 @Injectable({ providedIn: 'root' })
 export class RecordFormDialogService {
@@ -16,9 +17,14 @@ export class RecordFormDialogService {
   private currentHash: { [key: string]: Record } = {};
 
   addUpdatedRecord(record: Record): void {
-    this.currentHash[record.serialNumber] = record;
+    this.currentHash[record.serialNumber] = {
+      ...record,
+      issueDate: isDate(record.issueDate)
+        ? dateToString(record.issueDate as Date)
+        : record.issueDate,
+    };
     this.updatedRecordsHashSubject.next(this.currentHash);
-    // console.log(this.currentHash);
+    console.log(this.currentHash);
   }
 
   softRemoveRecord(recordSerialNumber: string): void {

@@ -76,12 +76,10 @@
 
   <!-- dialog buttons -->
   <mat-dialog-actions>
-    <button mat-raised-button color="warn" (click)="onCancel()">Ακύρωση</button>
-    <button
-      mat-raised-button
-      color="accent"
-      [mat-dialog-close]="form.getRawValue()"
-    >
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">
+      Ακύρωση
+    </button>
+    <button mat-raised-button color="accent" (click)="onSubmit()">
       Καταχώρηση αλλαγών
     </button>
   </mat-dialog-actions>

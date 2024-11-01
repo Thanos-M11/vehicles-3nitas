@@ -21,8 +21,9 @@ import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { Driver } from '../../drivers/drivers.model';
 import { ApprovedPipe } from '../approved.pipe';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { formatIssueDate } from '../../helper/helper';
 import { MaterialModule } from '../../material/material.module';
+import { VehicleRecordForm } from './record-form-dialog.model';
+import { dateToString, stringToDate } from '../../helper/helper';
 
 @Component({
   selector: 'app-record-form-dialog',
@@ -49,17 +50,21 @@ export class RecordFormDialogComponent implements OnInit {
   driversService = inject(DriversService);
   drivers = toSignal<Driver[]>(this.driversService.loadDrivers$());
   statusOptions = [true, false];
+  formHasChanged = false;
 
-  form = new FormGroup({
-    serialNumber: new FormControl({ value: '', disabled: true }),
-    plate: new FormControl({ value: '', disabled: true }),
-    fullName: new FormControl(''),
-    issueDate: new FormControl(''),
-    isApproved: new FormControl(),
-    tierAmount: new FormControl(0, [Validators.min(0.01), Validators.max(1)]),
-    registrationAmount: new FormControl(0),
-    consumptionAmount: new FormControl(0),
-    rewardAmount: new FormControl({ value: 0, disabled: true }),
+  form = new FormGroup<VehicleRecordForm>({
+    serialNumber: new FormControl({ value: null, disabled: true }),
+    plate: new FormControl({ value: null, disabled: true }),
+    fullName: new FormControl(null),
+    issueDate: new FormControl(null),
+    isApproved: new FormControl(null),
+    tierAmount: new FormControl(null, [
+      Validators.min(0.01),
+      Validators.max(1),
+    ]),
+    registrationAmount: new FormControl(null),
+    consumptionAmount: new FormControl(null),
+    rewardAmount: new FormControl({ value: null, disabled: true }),
   });
 
   ngOnInit() {
@@ -73,10 +78,19 @@ export class RecordFormDialogComponent implements OnInit {
           }
         },
       });
+
+    this.form.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((value) => {
+        if (value) {
+          this.formHasChanged = true;
+        }
+      });
   }
 
-  onCancel(): void {
-    this.dialogRef.close();
+  onSubmit() {
+    this.dialogRef.close(this.form.getRawValue());
+    console.log(this.form.getRawValue());
   }
 
   private formPatchValue(record: Record): void {
@@ -84,12 +98,12 @@ export class RecordFormDialogComponent implements OnInit {
       serialNumber: record.serialNumber,
       plate: record.plate,
       fullName: record.fullName,
-      issueDate: record.issueDate,
-      isApproved: Boolean(record.isApproved),
-      tierAmount: +record.tierAmount,
-      registrationAmount: +record.registrationAmount,
-      consumptionAmount: +record.consumptionAmount,
-      rewardAmount: +record.rewardAmount,
+      issueDate: stringToDate(record.issueDate as string),
+      isApproved: record.isApproved,
+      tierAmount: record.tierAmount,
+      registrationAmount: record.registrationAmount,
+      consumptionAmount: record.consumptionAmount,
+      rewardAmount: record.rewardAmount,
     });
   }
 }

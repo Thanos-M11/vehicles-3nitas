@@ -3,7 +3,7 @@ export interface Record {
   fullName: string;
   driverId: number;
   plate: string;
-  issueDate: string;
+  issueDate: string | Date;
   isApproved: boolean | undefined;
   tierAmount: number;
   registrationAmount: number;
