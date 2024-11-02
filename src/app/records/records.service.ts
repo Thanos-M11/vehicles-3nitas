@@ -1,7 +1,8 @@
+import { RemovedRecords } from './records.model';
 import { RecordFormDialogService } from './record-form-dialog/record-form-dialog.service';
 import { inject, Injectable } from '@angular/core';
 import { Record, UpdatedRecords } from '../records/records.model';
-import { Filter } from '../filters/filter.model';
+import { Filter, FilterCondition } from '../filters/filter.model';
 import { HttpClient } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -87,30 +88,11 @@ export class RecordsService {
     ]).pipe(
       map(([resData, filterConditions, removedRecords, updatedRecords]) => {
         let records = resData;
-
-        // apply filter on removed records
-        if (Object.keys(removedRecords)) {
-          records = records.filter(
-            (record) => removedRecords[record.serialNumber] !== true
-          );
-        }
-
-        // apply changes from updated records
+        records = this.getRemovedRecords(records, removedRecords);
         records = this.getUpdatedRecords(records, updatedRecords);
-
-        // apply main filter on records
-        if (filterConditions) {
-          for (const condition of filterConditions) {
-            if (condition) {
-              records = records.filter(condition);
-            }
-          }
-        }
-
-        // update records length on paginator
+        records = this.getFilteredRecords(records, filterConditions);
         this.sharedPaginationService.setLength(records.length);
         this.setIsLoading(false);
-
         return records;
       }),
       catchError((error) => {
@@ -132,6 +114,34 @@ export class RecordsService {
         }
         return record;
       });
+    }
+    return records;
+  }
+
+  private getRemovedRecords(
+    existingRecords: Record[],
+    removedRecords: RemovedRecords
+  ): Record[] {
+    let records = existingRecords;
+    if (Object.keys(removedRecords)) {
+      records = existingRecords.filter(
+        (record) => removedRecords[record.serialNumber] !== true
+      );
+    }
+    return records;
+  }
+
+  private getFilteredRecords(
+    existingRecords: Record[],
+    filterConditions: FilterCondition[]
+  ): Record[] {
+    let records = existingRecords;
+    if (filterConditions) {
+      for (const condition of filterConditions) {
+        if (condition) {
+          records = records.filter(condition);
+        }
+      }
     }
     return records;
   }
