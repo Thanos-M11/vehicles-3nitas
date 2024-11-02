@@ -28,12 +28,15 @@
     <mat-form-field>
       <mat-label>Ημερομηνία Έναρξης</mat-label>
       <input matInput [matDatepicker]="picker" formControlName="issueDate" />
-      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-hint>ΜΜ/ΗΗ/ΕΕΕΕ</mat-hint>
       <mat-datepicker-toggle
         matIconSuffix
         [for]="picker"
       ></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      @if(issueDateIsInvalid){
+      <mat-error>Μήνας / Ημερα / Ετος</mat-error>
+      }
     </mat-form-field>
 
     <!-- isApproved -->
@@ -50,8 +53,8 @@
     <mat-form-field>
       <mat-label>Κλίμακα επιβράβευσης</mat-label>
       <input matInput formControlName="tierAmount" />
-      @if(form.get('tierAmount')?.hasError){
-      <mat-error> Συντελεστής: (0.01 - 1.00)</mat-error>
+      @if(tierAmountIsInvalid){
+      <mat-error>Συντελεστής: (0.01 - 1.00)</mat-error>
       }
     </mat-form-field>
 
@@ -59,12 +62,18 @@
     <mat-form-field>
       <mat-label>Ποσό καταχώρησης</mat-label>
       <input matInput formControlName="registrationAmount" />
+      @if(registrationAmountIsInvalid){
+      <mat-error>Επιλέξτε ποσό > 0</mat-error>
+      }
     </mat-form-field>
 
     <!-- consumption amount -->
     <mat-form-field>
       <mat-label>Ποσότητα κατανάλωσης</mat-label>
       <input matInput formControlName="consumptionAmount" />
+      @if(consumptionAmountIsInvalid){
+      <mat-error>Επιλέξτε ποσό > 0</mat-error>
+      }
     </mat-form-field>
 
     <!-- reward amount -->

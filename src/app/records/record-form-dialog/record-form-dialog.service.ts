@@ -22,6 +22,10 @@ export class RecordFormDialogService {
       issueDate: isDate(record.issueDate)
         ? dateToString(record.issueDate as Date)
         : record.issueDate,
+      tierAmount: +record.tierAmount,
+      registrationAmount: +record.registrationAmount,
+      consumptionAmount: +record.consumptionAmount,
+      rewardAmount: +record.tierAmount * +record.consumptionAmount,
     };
     this.updatedRecordsHashSubject.next(this.currentHash);
     console.log(this.currentHash);
