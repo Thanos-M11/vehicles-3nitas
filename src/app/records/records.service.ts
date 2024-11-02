@@ -1,6 +1,6 @@
 import { RecordFormDialogService } from './record-form-dialog/record-form-dialog.service';
 import { inject, Injectable } from '@angular/core';
-import { Record } from '../records/records.model';
+import { Record, UpdatedRecords } from '../records/records.model';
 import { Filter } from '../filters/filter.model';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -46,11 +46,18 @@ export class RecordsService {
   }
 
   getRecordBySerialNumber$(serialNumber: string): Observable<Record | null> {
-    return this.httpClient.get<Record[]>(this.jsonUrl).pipe(
-      map(
-        (records: Record[]) =>
-          records.find((record) => record.serialNumber === serialNumber) || null
-      ),
+    return combineLatest([
+      this.httpClient.get<Record[]>(this.jsonUrl),
+      this.updatedRecords$,
+    ]).pipe(
+      map(([resData, updatedRecords]) => {
+        const records = this.getUpdatedRecords(resData, updatedRecords);
+        const record: Record | null =
+          records.find((rec: Record) => rec.serialNumber === serialNumber) ||
+          null;
+
+        return record;
+      }),
       catchError((error) => {
         console.log(error);
         return throwError(() => new Error(error.message));
@@ -89,15 +96,7 @@ export class RecordsService {
         }
 
         // apply changes from updated records
-        if (Object.keys(updatedRecords)) {
-          records = records.map((record) => {
-            if (updatedRecords[record.serialNumber]) {
-              // console.log(updatedRecords[record.serialNumber]);
-              return updatedRecords[record.serialNumber];
-            }
-            return record;
-          });
-        }
+        records = this.getUpdatedRecords(records, updatedRecords);
 
         // apply main filter on records
         if (filterConditions) {
@@ -119,5 +118,21 @@ export class RecordsService {
         return throwError(() => new Error(error.message));
       })
     );
+  }
+
+  private getUpdatedRecords(
+    existingRecords: Record[],
+    updatedRecords: UpdatedRecords
+  ): Record[] {
+    let records = existingRecords;
+    if (Object.keys(updatedRecords)) {
+      records = existingRecords.map((record: Record) => {
+        if (updatedRecords[record.serialNumber]) {
+          return updatedRecords[record.serialNumber];
+        }
+        return record;
+      });
+    }
+    return records;
   }
 }
