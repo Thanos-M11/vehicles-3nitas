@@ -2,7 +2,7 @@
   <section id="plate-search">
     <section class="active-vehicles">
       <app-truck-icon />
-      <h2>Ενεργά Οχήματα</h2>
+      <h5>Ενεργά Οχήματα</h5>
     </section>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -16,10 +16,12 @@
           type="button"
           [routerLink]="['/records']"
           (click)="onCancel()"
+          color="warn"
           >Ακύρωση</a
         >
         <button
           mat-raised-button
+          color="accent"
           type="submit"
           [routerLink]="['/records', form.value.enteredPlate]"
         >

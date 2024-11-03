@@ -4,3 +4,7 @@ mat-label {
   justify-content: center;
   gap: 1em;
 }
+
+mat-form-field {
+  width: inherit;
+}
