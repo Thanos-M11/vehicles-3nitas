@@ -24,6 +24,7 @@ import { provideNativeDateAdapter } from '@angular/material/core';
 import { MaterialModule } from '../../material/material.module';
 import { VehicleRecordForm } from './record-form-dialog.model';
 import { dateToString, stringToDate } from '../../helper/helper';
+import { InputComponent } from '../../shared/input/input.component';
 
 @Component({
   selector: 'app-record-form-dialog',
@@ -36,6 +37,7 @@ import { dateToString, stringToDate } from '../../helper/helper';
     RecordIssueDatePipe,
     DatePipe,
     ApprovedPipe,
+    InputComponent,
   ],
   templateUrl: './record-form-dialog.component.html',
   styleUrl: './record-form-dialog.component.css',

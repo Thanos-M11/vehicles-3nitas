@@ -1,22 +1,8 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <fieldset>
-    <mat-form-field appearance="fill">
-      <mat-label class="serial-number-label">
-        <mat-icon
-          aria-hidden="false"
-          aria-label="search icon"
-          fontIcon="search"
-        ></mat-icon>
-        <span>Σειρά Αριθμός</span>
-      </mat-label>
-      <input
-        matInput
-        id="serial-number"
-        name="serial-number"
-        type="text"
-        formControlName="serialNumber"
-      />
-    </mat-form-field>
+    <app-input label="Σειρά Αριθμός" type="text" formControlName="serialNumber">
+      <mat-icon>search</mat-icon>
+    </app-input>
 
     <mat-form-field appearance="fill">
       <mat-label>Οδηγός</mat-label>

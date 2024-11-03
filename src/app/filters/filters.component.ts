@@ -16,11 +16,12 @@ import { Vehicle } from '../vehicles/vehicles.model';
 import { combineLatest } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
+import { InputComponent } from '../shared/input/input.component';
 
 @Component({
   selector: 'app-filters',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, MaterialModule],
+  imports: [ReactiveFormsModule, RouterLink, MaterialModule, InputComponent],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
   providers: [provideNativeDateAdapter()],
@@ -44,7 +45,7 @@ export class FiltersComponent implements OnInit {
   constructor() {}
 
   form = new FormGroup({
-    serialNumber: new FormControl(),
+    serialNumber: new FormControl(''),
     driver: new FormControl(''),
     dateRange: new FormGroup({
       start: new FormControl<Date | null>(null),

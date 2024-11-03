@@ -1,7 +1,7 @@
 import { Record } from '../records/records.model';
 
 export interface Filter {
-  serialNumber?: string;
+  serialNumber: string | null | undefined;
   driverId?: number;
   startDate?: Date | null;
   endDate?: Date | null;

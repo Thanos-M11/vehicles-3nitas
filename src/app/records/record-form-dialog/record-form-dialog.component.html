@@ -3,16 +3,20 @@
     <h2>#{{ data.serialNumber }}</h2>
 
     <!-- serial number disabled -->
-    <mat-form-field appearance="outline">
-      <mat-label>Σειρά Αριθμός</mat-label>
-      <input matInput formControlName="serialNumber" />
-    </mat-form-field>
+    <app-input
+      appearance="outline"
+      label="Σειρά Αριθμός"
+      type="text"
+      formControlName="serialNumber"
+    ></app-input>
 
     <!-- plate disabled -->
-    <mat-form-field appearance="outline">
-      <mat-label>Πινακίδα</mat-label>
-      <input matInput formControlName="plate" />
-    </mat-form-field>
+    <app-input
+      appearance="outline"
+      label="Πινακίδα"
+      type="text"
+      formControlName="plate"
+    ></app-input>
 
     <!-- fullName -->
     <mat-form-field>
