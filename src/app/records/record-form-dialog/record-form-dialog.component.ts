@@ -139,7 +139,7 @@ export class RecordFormDialogComponent implements OnInit {
       tierAmount: new FormControl(null, {
         validators: [
           Validators.min(0.01),
-          Validators.max(1),
+          Validators.max(1.0),
           Validators.required,
         ],
         updateOn: 'change',

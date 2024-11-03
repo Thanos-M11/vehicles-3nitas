@@ -6,7 +6,6 @@
     <app-input
       appearance="outline"
       label="Σειρά Αριθμός"
-      type="text"
       formControlName="serialNumber"
     ></app-input>
 
@@ -14,7 +13,6 @@
     <app-input
       appearance="outline"
       label="Πινακίδα"
-      type="text"
       formControlName="plate"
     ></app-input>
 
@@ -54,40 +52,27 @@
     </mat-form-field>
 
     <!-- tier amount -->
-    <mat-form-field>
-      <mat-label>Κλίμακα επιβράβευσης</mat-label>
-      <input matInput formControlName="tierAmount" />
+    <app-input label="Κλίμακα επιβράβευσης" formControlName="tierAmount">
       @if(tierAmountIsInvalid){
-      <mat-error>Συντελεστής: (0.01 - 1.00)</mat-error>
+      <mat-error>Αριθμός (0.01 - 1.00)</mat-error>
       }
-    </mat-form-field>
+    </app-input>
 
     <!-- registration amount -->
-    <mat-form-field>
-      <mat-label>Ποσό καταχώρησης</mat-label>
-      <input matInput formControlName="registrationAmount" />
+    <app-input label="Ποσό καταχώρησης" formControlName="registrationAmount">
       @if(registrationAmountIsInvalid){
       <mat-error>Επιλέξτε ποσό > 0</mat-error>
       }
-    </mat-form-field>
+    </app-input>
 
     <!-- consumption amount -->
-    <mat-form-field>
-      <mat-label>Ποσότητα κατανάλωσης</mat-label>
-      <input matInput formControlName="consumptionAmount" />
+    <app-input label="Ποσότητα κατανάλωσης" formControlName="consumptionAmount">
       @if(consumptionAmountIsInvalid){
       <mat-error>Επιλέξτε ποσό > 0</mat-error>
       }
-    </mat-form-field>
-
-    <!-- reward amount -->
-    <!-- <mat-form-field>
-      <mat-label>Ποσό επιβράβευσης</mat-label>
-      <input matInput formControlName="rewardAmount" />
-    </mat-form-field> -->
+    </app-input>
   </mat-dialog-content>
 
-  <!-- dialog buttons -->
   <mat-dialog-actions>
     <button mat-raised-button color="warn" (click)="dialogRef.close()">
       Ακύρωση

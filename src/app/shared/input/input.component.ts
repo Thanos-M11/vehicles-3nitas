@@ -25,7 +25,7 @@ import {
 export class InputComponent implements ControlValueAccessor {
   @Input() appearance: MatFormFieldAppearance = 'fill';
   @Input({ required: true }) label!: string;
-  @Input({ required: true }) type!: string;
+  @Input() type: string = 'text';
 
   value: string = '';
   disabled = false;
