@@ -17,11 +17,18 @@ import { combineLatest } from 'rxjs';
 import { RouterLink } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { InputComponent } from '../shared/input/input.component';
+import { ApprovedPipe } from '../records/approved.pipe';
 
 @Component({
   selector: 'app-filters',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, MaterialModule, InputComponent],
+  imports: [
+    ReactiveFormsModule,
+    RouterLink,
+    MaterialModule,
+    InputComponent,
+    ApprovedPipe,
+  ],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
   providers: [provideNativeDateAdapter()],
@@ -33,11 +40,7 @@ export class FiltersComponent implements OnInit {
   private vehicleService = inject(VehiclesService);
   private destroyRef = inject(DestroyRef);
 
-  approvedDropDown = [
-    { id: '2', options: 'Ολες' },
-    { id: '1', options: 'Εγκεκριμένο' },
-    { id: '0', options: 'Ακυρωμένο' },
-  ];
+  statusOptions = [true, false];
 
   public driversDropDown!: DriverState;
   public vehicleSelected!: Vehicle;
@@ -51,7 +54,7 @@ export class FiltersComponent implements OnInit {
       start: new FormControl<Date | null>(null),
       end: new FormControl<Date | null>(null),
     }),
-    isApproved: new FormControl(''),
+    isApproved: new FormControl(),
   });
 
   ngOnInit() {

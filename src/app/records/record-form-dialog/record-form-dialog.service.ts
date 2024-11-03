@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Record, RemovedRecords } from '../records.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { dateToString, isDate, stringToDate } from '../../helper/helper';
+import { dateToString, isDate } from '../../helper/helper';
 
 @Injectable({ providedIn: 'root' })
 export class RecordFormDialogService {
@@ -28,7 +28,7 @@ export class RecordFormDialogService {
       rewardAmount: +record.tierAmount * +record.consumptionAmount,
     };
     this.updatedRecordsHashSubject.next(this.currentHash);
-    console.log(this.currentHash);
+    // console.log(this.currentHash);
   }
 
   softRemoveRecord(recordSerialNumber: string): void {

@@ -72,9 +72,9 @@ export class FilterService {
         ? (record: Record) => record.driverId === filter.driverId
         : null,
 
-      filter.isApproved === '0'
+      filter.isApproved === false
         ? (record: Record) => record.isApproved === false
-        : filter.isApproved === '1'
+        : filter.isApproved === true
         ? (record: Record) => record.isApproved === true
         : null,
 

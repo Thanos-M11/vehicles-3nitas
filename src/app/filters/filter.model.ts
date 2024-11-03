@@ -5,7 +5,7 @@ export interface Filter {
   driverId?: number;
   startDate?: Date | null;
   endDate?: Date | null;
-  isApproved?: string;
+  isApproved?: boolean;
   plate?: string;
 }
 

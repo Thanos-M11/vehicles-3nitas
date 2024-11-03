@@ -7,7 +7,6 @@
     <mat-form-field appearance="fill">
       <mat-label>Οδηγός</mat-label>
       <mat-select formControlName="driver">
-        <mat-option [value]="0">Όλοι</mat-option>
         @for(driver of driversDropDown; track driver.id){
         <mat-option [value]="driver.id">{{ driver.fullName }}</mat-option>
         }@empty {<span>The driver's list is empty</span>}
@@ -49,8 +48,8 @@
     <mat-form-field>
       <mat-label>Κατάσταση</mat-label>
       <mat-select formControlName="isApproved">
-        @for(status of approvedDropDown; track status.id){
-        <mat-option [value]="status.id">{{ status.options }}</mat-option>
+        @for(option of statusOptions; track option){
+        <mat-option [value]="option">{{ option | approved }}</mat-option>
         }
       </mat-select>
     </mat-form-field>

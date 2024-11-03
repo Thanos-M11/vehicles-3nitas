@@ -1,6 +1,5 @@
-import { Component, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   FormsModule,
@@ -23,7 +22,7 @@ import { ApprovedPipe } from '../approved.pipe';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MaterialModule } from '../../material/material.module';
 import { VehicleRecordForm } from './record-form-dialog.model';
-import { dateToString, stringToDate } from '../../helper/helper';
+import { stringToDate } from '../../helper/helper';
 import { InputComponent } from '../../shared/input/input.component';
 
 @Component({
@@ -52,7 +51,6 @@ export class RecordFormDialogComponent implements OnInit {
   driversService = inject(DriversService);
   drivers = toSignal<Driver[]>(this.driversService.loadDrivers$());
   statusOptions = [true, false];
-  formHasChanged = false;
   form!: FormGroup<VehicleRecordForm>;
 
   constructor() {
