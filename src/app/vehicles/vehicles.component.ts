@@ -2,34 +2,30 @@ import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleState } from './vehicles.model';
 import { VehiclesService } from './vehicle.service';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FilterService } from '../filters/filter.service';
 import { Filter } from '../filters/filter.model';
-import { MatListModule } from '@angular/material/list';
 import { TruckIconComponent } from '../shared/icons/truck-icon/truck-icon.component';
 
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
-import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDividerModule } from '@angular/material/divider';
 import { MaterialModule } from '../material/material.module';
+import { InputComponent } from '../shared/input/input.component';
 
 @Component({
   selector: 'app-vehicles',
   standalone: true,
   imports: [
     VehicleComponent,
-    FormsModule,
+    ReactiveFormsModule,
     MaterialModule,
     TruckIconComponent,
     AsyncPipe,
     ProgressSpinnerComponent,
     RouterLink,
+    InputComponent,
   ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',
@@ -42,9 +38,13 @@ export class VehiclesComponent implements OnInit {
 
   public truckIconClass: string = 'green';
   public vehicles!: VehicleState;
-  public enteredPlate = '';
+  // public enteredPlate = '';
   public filter!: Filter;
   public isLoading$ = this.isLoadingSubject.asObservable();
+
+  form = new FormGroup({
+    enteredPlate: new FormControl(''),
+  });
 
   constructor() {}
 
@@ -65,13 +65,15 @@ export class VehiclesComponent implements OnInit {
   }
 
   onSubmit() {
-    this.vehiclesService.setSelectedVehicle(this.enteredPlate);
+    this.vehiclesService.setSelectedVehicle(
+      this.form.value.enteredPlate as string
+    );
 
     this.filterService.setFilter({
       ...this.filter,
-      plate: this.enteredPlate,
+      plate: this.form.value.enteredPlate as string,
     });
-    this.enteredPlate = '';
+    this.form.reset();
   }
 
   onCancel() {
@@ -80,6 +82,6 @@ export class VehiclesComponent implements OnInit {
       ...this.filter,
       plate: '',
     });
-    this.enteredPlate = '';
+    this.form.reset();
   }
 }

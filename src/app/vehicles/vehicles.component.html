@@ -5,24 +5,11 @@
       <h2>Ενεργά Οχήματα</h2>
     </section>
 
-    <form (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill">
-        <mat-label class="">
-          <mat-icon
-            aria-hidden="false"
-            aria-label="search icon"
-            fontIcon="search"
-          ></mat-icon>
-          <span>Αριθμός Πινακίδας</span>
-        </mat-label>
-        <input
-          matInput
-          id="plate"
-          name="plate"
-          type="text"
-          [(ngModel)]="enteredPlate"
-        />
-      </mat-form-field>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <app-input label="Αριθμός πινακίδας" formControlName="enteredPlate">
+        <mat-icon>search</mat-icon>
+      </app-input>
+
       <section class="btn-bar">
         <a
           mat-raised-button
@@ -34,7 +21,7 @@
         <button
           mat-raised-button
           type="submit"
-          [routerLink]="['/records', enteredPlate]"
+          [routerLink]="['/records', form.value.enteredPlate]"
         >
           Αναζήτηση
         </button>
