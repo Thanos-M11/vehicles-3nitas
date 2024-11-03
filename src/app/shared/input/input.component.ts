@@ -2,16 +2,13 @@ import { Component, forwardRef, Input } from '@angular/core';
 
 import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { MaterialModule } from '../../material/material.module';
-import {
-  ControlValueAccessor,
-  FormControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-input',
   standalone: true,
-  imports: [MaterialModule],
+  imports: [MaterialModule, CommonModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
   providers: [
@@ -25,7 +22,7 @@ import {
 export class InputComponent implements ControlValueAccessor {
   @Input() appearance: MatFormFieldAppearance = 'fill';
   @Input({ required: true }) label!: string;
-  @Input() type: string = 'text';
+  @Input({ required: true }) type!: 'text' | 'number';
 
   value: string = '';
   disabled = false;

@@ -6,7 +6,11 @@
     </section>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <app-input label="Αριθμός πινακίδας" formControlName="enteredPlate">
+      <app-input
+        type="text"
+        label="Αριθμός πινακίδας"
+        formControlName="enteredPlate"
+      >
         <mat-icon>search</mat-icon>
       </app-input>
 

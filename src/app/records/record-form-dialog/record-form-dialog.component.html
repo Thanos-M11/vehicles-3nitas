@@ -4,6 +4,7 @@
 
     <!-- serial number disabled -->
     <app-input
+      type="text"
       appearance="outline"
       label="Σειρά Αριθμός"
       formControlName="serialNumber"
@@ -11,6 +12,7 @@
 
     <!-- plate disabled -->
     <app-input
+      type="text"
       appearance="outline"
       label="Πινακίδα"
       formControlName="plate"
@@ -52,21 +54,33 @@
     </mat-form-field>
 
     <!-- tier amount -->
-    <app-input label="Κλίμακα επιβράβευσης" formControlName="tierAmount">
+    <app-input
+      type="number"
+      label="Κλίμακα επιβράβευσης"
+      formControlName="tierAmount"
+    >
       @if(tierAmountIsInvalid){
       <mat-error>Αριθμός (0.01 - 1.00)</mat-error>
       }
     </app-input>
 
     <!-- registration amount -->
-    <app-input label="Ποσό καταχώρησης" formControlName="registrationAmount">
+    <app-input
+      type="number"
+      label="Ποσό καταχώρησης"
+      formControlName="registrationAmount"
+    >
       @if(registrationAmountIsInvalid){
       <mat-error>Επιλέξτε ποσό > 0</mat-error>
       }
     </app-input>
 
     <!-- consumption amount -->
-    <app-input label="Ποσότητα κατανάλωσης" formControlName="consumptionAmount">
+    <app-input
+      type="number"
+      label="Ποσότητα κατανάλωσης"
+      formControlName="consumptionAmount"
+    >
       @if(consumptionAmountIsInvalid){
       <mat-error>Επιλέξτε ποσό > 0</mat-error>
       }
