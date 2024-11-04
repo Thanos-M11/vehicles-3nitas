@@ -18,6 +18,8 @@ import { RouterLink } from '@angular/router';
 import { MaterialModule } from '../material/material.module';
 import { InputComponent } from '../shared/input/input.component';
 import { ApprovedPipe } from '../records/approved.pipe';
+import { SelectComponent } from '../shared/select/select.component';
+import { SelectOptions } from '../shared/select/select.model';
 
 @Component({
   selector: 'app-filters',
@@ -28,6 +30,7 @@ import { ApprovedPipe } from '../records/approved.pipe';
     MaterialModule,
     InputComponent,
     ApprovedPipe,
+    SelectComponent,
   ],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
@@ -40,9 +43,11 @@ export class FiltersComponent implements OnInit {
   private vehicleService = inject(VehiclesService);
   private destroyRef = inject(DestroyRef);
 
-  statusOptions = [true, false];
-
-  public driversDropDown!: DriverState;
+  public statusOptions: SelectOptions[] = [
+    { value: true, label: 'Εγκεκριμένο' },
+    { value: false, label: 'Ακυρωμένο' },
+  ];
+  public driversDropDown: SelectOptions[] = [];
   public vehicleSelected!: Vehicle;
 
   constructor() {}
@@ -64,7 +69,13 @@ export class FiltersComponent implements OnInit {
     ]).subscribe({
       next: ([vehicle, drivers]) => {
         this.vehicleSelected = vehicle!;
-        this.driversDropDown = drivers;
+        // updated driversDropdown options
+        drivers.forEach((driver) => {
+          this.driversDropDown.push({
+            value: driver.id,
+            label: driver.fullName,
+          });
+        });
       },
     });
 
@@ -74,7 +85,7 @@ export class FiltersComponent implements OnInit {
   onSubmit() {
     const newFilter: Filter = {
       serialNumber: this.form.value.serialNumber,
-      driverId: +this.form.value.driver!,
+      driverId: this.form.value.driver as string,
       startDate:
         this.form.value.dateRange?.start &&
         new Date(this.form.value.dateRange.start),
@@ -86,6 +97,7 @@ export class FiltersComponent implements OnInit {
 
     this.filterService.setFilter(newFilter);
     // console.log(this.form.controls.dateRange.controls);
+    // console.log(newFilter);
   }
 
   onClearFilter() {

@@ -17,3 +17,7 @@ fieldset {
 button {
   margin: 0 1rem;
 }
+
+app-select {
+  margin-left: 0.5em;
+}

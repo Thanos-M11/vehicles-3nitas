@@ -4,14 +4,12 @@
       <mat-icon>search</mat-icon>
     </app-input>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Οδηγός</mat-label>
-      <mat-select formControlName="driver">
-        @for(driver of driversDropDown; track driver.id){
-        <mat-option [value]="driver.id">{{ driver.fullName }}</mat-option>
-        }@empty {<span>The driver's list is empty</span>}
-      </mat-select>
-    </mat-form-field>
+    <app-select
+      label="Οδηγός"
+      [options]="driversDropDown"
+      formControlName="driver"
+    >
+    </app-select>
 
     <mat-form-field>
       <mat-label>Hμερομηνία</mat-label>
@@ -45,14 +43,12 @@
       }
     </mat-form-field>
 
-    <mat-form-field>
-      <mat-label>Κατάσταση</mat-label>
-      <mat-select formControlName="isApproved">
-        @for(option of statusOptions; track option){
-        <mat-option [value]="option">{{ option | approved }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+    <app-select
+      label="Κατάσταση"
+      [options]="statusOptions"
+      formControlName="isApproved"
+    >
+    </app-select>
 
     <button mat-raised-button color="primary" type="submit">Αναζήτηση</button>
     <a
