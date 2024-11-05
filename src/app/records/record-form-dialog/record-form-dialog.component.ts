@@ -24,7 +24,11 @@ import { VehicleRecordForm } from './record-form-dialog.model';
 import { stringToDate } from '../../helper/helper';
 import { InputComponent } from '../../shared/input/input.component';
 import { SelectComponent } from '../../shared/select/select.component';
-import { SelectOptions } from '../../shared/select/select.model';
+import {
+  SelectOptions,
+  STATUS_OPTIONS_TOKEN,
+  statusOptionsProvider,
+} from '../../shared/select/select.model';
 
 @Component({
   selector: 'app-record-form-dialog',
@@ -42,26 +46,18 @@ import { SelectOptions } from '../../shared/select/select.model';
   ],
   templateUrl: './record-form-dialog.component.html',
   styleUrl: './record-form-dialog.component.css',
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), statusOptionsProvider],
 })
 export class RecordFormDialogComponent implements OnInit {
   readonly dialogRef = inject(MatDialogRef<RecordFormDialogComponent>);
   readonly data = inject<{ serialNumber: string }>(MAT_DIALOG_DATA);
   private recordsService = inject(RecordsService);
   private destroyRef = inject(DestroyRef);
+  statusOptions = inject(STATUS_OPTIONS_TOKEN);
 
   driversService = inject(DriversService);
   driversDropDown: SelectOptions[] = [];
-  statusOptions: SelectOptions[] = [
-    {
-      value: true,
-      label: 'Εγκεκριμένο',
-    },
-    {
-      value: false,
-      label: 'Ακυρωμένο',
-    },
-  ];
+
   form!: FormGroup<VehicleRecordForm>;
 
   constructor() {

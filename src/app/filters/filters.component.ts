@@ -11,7 +11,6 @@ import { FilterService } from './filter.service';
 import { DriversService } from '../drivers/driver.service';
 import { VehiclesService } from '../vehicles/vehicle.service';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { DriverState } from '../drivers/drivers.model';
 import { Vehicle } from '../vehicles/vehicles.model';
 import { combineLatest } from 'rxjs';
 import { RouterLink } from '@angular/router';
@@ -19,7 +18,11 @@ import { MaterialModule } from '../material/material.module';
 import { InputComponent } from '../shared/input/input.component';
 import { ApprovedPipe } from '../records/approved.pipe';
 import { SelectComponent } from '../shared/select/select.component';
-import { SelectOptions } from '../shared/select/select.model';
+import {
+  SelectOptions,
+  STATUS_OPTIONS_TOKEN,
+  statusOptionsProvider,
+} from '../shared/select/select.model';
 
 @Component({
   selector: 'app-filters',
@@ -34,7 +37,7 @@ import { SelectOptions } from '../shared/select/select.model';
   ],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
-  providers: [provideNativeDateAdapter()],
+  providers: [provideNativeDateAdapter(), statusOptionsProvider],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FiltersComponent implements OnInit {
@@ -43,10 +46,7 @@ export class FiltersComponent implements OnInit {
   private vehicleService = inject(VehiclesService);
   private destroyRef = inject(DestroyRef);
 
-  public statusOptions: SelectOptions[] = [
-    { value: true, label: 'Εγκεκριμένο' },
-    { value: false, label: 'Ακυρωμένο' },
-  ];
+  public statusOptions = inject(STATUS_OPTIONS_TOKEN);
   public driversDropDown: SelectOptions[] = [];
   public vehicleSelected!: Vehicle;
 
