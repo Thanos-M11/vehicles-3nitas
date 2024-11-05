@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Filter, FilterCondition } from './filter.model';
+import { Filter, FilterCondition } from '../models/filter.model';
 import { BehaviorSubject } from 'rxjs';
-import { Record } from '../records/records.model';
+import { Record } from '../models/records.model';
 import { stringToDate } from '../helper/helper';
 
 const initialFilterState = {

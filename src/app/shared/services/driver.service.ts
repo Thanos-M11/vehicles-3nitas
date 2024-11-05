@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 
 import { catchError, map, Observable, throwError } from 'rxjs';
-import { Driver } from '../drivers/drivers.model';
+import { Driver } from '../models/drivers.model';
 
 @Injectable({ providedIn: 'root' })
 export class DriversService {

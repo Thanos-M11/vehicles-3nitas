@@ -1,7 +1,7 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
 import { MatFormFieldAppearance } from '@angular/material/form-field';
-import { MaterialModule } from '../../material/material.module';
+import { MaterialModule } from '../../../modules/material.module';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 

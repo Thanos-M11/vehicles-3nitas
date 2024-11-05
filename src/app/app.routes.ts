@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { RecordsComponent } from './records/records.component';
+import { RecordsComponent } from './features/records/records.component';
 
 export const routes: Routes = [
   {

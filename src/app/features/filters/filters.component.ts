@@ -6,23 +6,23 @@ import {
   OnInit,
 } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Filter } from './filter.model';
-import { FilterService } from './filter.service';
-import { DriversService } from '../drivers/driver.service';
-import { VehiclesService } from '../vehicles/vehicle.service';
+import { Filter } from '../../shared/models/filter.model';
+import { FilterService } from '../../shared/services/filter.service';
+import { VehiclesService } from '../../shared/services/vehicle.service';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { Vehicle } from '../vehicles/vehicles.model';
+import { Vehicle } from '../../shared/models/vehicles.model';
 import { combineLatest } from 'rxjs';
 import { RouterLink } from '@angular/router';
-import { MaterialModule } from '../material/material.module';
-import { InputComponent } from '../shared/input/input.component';
-import { ApprovedPipe } from '../records/approved.pipe';
-import { SelectComponent } from '../shared/select/select.component';
+import { MaterialModule } from '../../modules/material.module';
+import { InputComponent } from '../../shared/components/input/input.component';
+import { SelectComponent } from '../../shared/components/select/select.component';
 import {
   SelectOptions,
   STATUS_OPTIONS_TOKEN,
   statusOptionsProvider,
-} from '../shared/select/select.model';
+} from '../../shared/models/select.model';
+import { DriversService } from '../../shared/services/driver.service';
+import { ApprovedPipe } from '../../shared/pipes/approved.pipe';
 
 @Component({
   selector: 'app-filters',
@@ -70,12 +70,14 @@ export class FiltersComponent implements OnInit {
       next: ([vehicle, drivers]) => {
         this.vehicleSelected = vehicle!;
         // updated driversDropdown options
+        this.driversDropDown = [];
         drivers.forEach((driver) => {
           this.driversDropDown.push({
             value: driver.id,
             label: driver.fullName,
           });
         });
+        // console.log(this.driversDropDown);
       },
     });
 

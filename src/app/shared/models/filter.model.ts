@@ -1,4 +1,4 @@
-import { Record } from '../records/records.model';
+import { Record } from './records.model';
 
 export interface Filter {
   serialNumber: string | null | undefined;

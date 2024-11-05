@@ -1,11 +1,10 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
-import { FilterService } from '../filters/filter.service';
 import { MatToolbar } from '@angular/material/toolbar';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDrawerToggleResult } from '@angular/material/sidenav';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FilterService } from '../../shared/services/filter.service';
 
 @Component({
   selector: 'app-toolbar',

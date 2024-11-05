@@ -1,18 +1,18 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { FilterService } from '../filters/filter.service';
-import { Record } from './records.model';
+import { FilterService } from '../../shared/services/filter.service';
+import { Record } from '../../shared/models/records.model';
 import { combineLatest, map, Observable, switchMap } from 'rxjs';
 import { AsyncPipe, DatePipe, DecimalPipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { EuroPipe } from './euro.pipe';
-import { UnitPipe } from './unit.pipe';
-import { RecordIssueDatePipe } from './record-issue-date.pipe';
-import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
+import { ProgressSpinnerComponent } from '../../shared/components/progress-spinner/progress-spinner.component';
 
-import { RecordsService } from './records.service';
-import { PaginatorService } from '../paginator/paginator.service';
-import { ApprovedPipe } from './approved.pipe';
+import { PaginatorService } from '../../shared/services/paginator.service';
 import { ActionsComponent } from './actions/actions.component';
+import { EuroPipe } from '../../shared/pipes/euro.pipe';
+import { UnitPipe } from '../../shared/pipes/unit.pipe';
+import { RecordIssueDatePipe } from '../../shared/pipes/record-issue-date.pipe';
+import { ApprovedPipe } from '../../shared/pipes/approved.pipe';
+import { RecordsService } from '../../shared/services/records.service';
 
 @Component({
   selector: 'app-records',

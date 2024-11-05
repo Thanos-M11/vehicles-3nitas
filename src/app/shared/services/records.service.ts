@@ -1,8 +1,10 @@
-import { RemovedRecords } from './records.model';
-import { RecordFormDialogService } from './record-form-dialog/record-form-dialog.service';
 import { inject, Injectable } from '@angular/core';
-import { Record, UpdatedRecords } from '../records/records.model';
-import { Filter, FilterCondition } from '../filters/filter.model';
+import {
+  Record,
+  RemovedRecords,
+  UpdatedRecords,
+} from '../models/records.model';
+import { Filter, FilterCondition } from '../models/filter.model';
 import { HttpClient } from '@angular/common/http';
 import {
   BehaviorSubject,
@@ -13,8 +15,9 @@ import {
   of,
   throwError,
 } from 'rxjs';
-import { SharedPaginationService } from '../paginator/shared-pagination.service';
-import { FilterService } from '../filters/filter.service';
+import { SharedPaginationService } from './shared-pagination.service';
+import { FilterService } from './filter.service';
+import { RecordFormDialogService } from './record-form-dialog.service';
 
 const displayedColumns = [
   'serialNumber',

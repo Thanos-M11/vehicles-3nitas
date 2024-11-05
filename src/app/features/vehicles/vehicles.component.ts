@@ -1,18 +1,18 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
 import { VehicleComponent } from './vehicle/vehicle.component';
-import { VehicleState } from './vehicles.model';
-import { VehiclesService } from './vehicle.service';
+import { VehicleState } from '../../shared/models/vehicles.model';
+import { VehiclesService } from '../../shared/services/vehicle.service';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FilterService } from '../filters/filter.service';
-import { Filter } from '../filters/filter.model';
-import { TruckIconComponent } from '../shared/icons/truck-icon/truck-icon.component';
+import { FilterService } from '../../shared/services/filter.service';
+import { Filter } from '../../shared/models/filter.model';
+import { TruckIconComponent } from '../../shared/icons/truck-icon/truck-icon.component';
 
 import { BehaviorSubject, combineLatest } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
-import { ProgressSpinnerComponent } from '../shared/progress-spinner/progress-spinner.component';
+import { ProgressSpinnerComponent } from '../../shared/components/progress-spinner/progress-spinner.component';
 import { RouterLink } from '@angular/router';
-import { MaterialModule } from '../material/material.module';
-import { InputComponent } from '../shared/input/input.component';
+import { MaterialModule } from '../../modules/material.module';
+import { InputComponent } from '../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-vehicles',

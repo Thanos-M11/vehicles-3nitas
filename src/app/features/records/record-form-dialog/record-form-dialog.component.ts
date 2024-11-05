@@ -11,24 +11,24 @@ import {
   MatDialogModule,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { RecordsService } from '../records.service';
-import { RecordIssueDatePipe } from '../record-issue-date.pipe';
 import { DatePipe } from '@angular/common';
-import { Record } from '../records.model';
-import { DriversService } from '../../drivers/driver.service';
+import { Record } from '../../../shared/models/records.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { ApprovedPipe } from '../approved.pipe';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { MaterialModule } from '../../material/material.module';
-import { VehicleRecordForm } from './record-form-dialog.model';
-import { stringToDate } from '../../helper/helper';
-import { InputComponent } from '../../shared/input/input.component';
-import { SelectComponent } from '../../shared/select/select.component';
+import { MaterialModule } from '../../../modules/material.module';
+import { VehicleRecordForm } from '../../../shared/models/record-form-dialog.model';
+import { stringToDate } from '../../../shared/helper/helper';
+import { InputComponent } from '../../../shared/components/input/input.component';
+import { SelectComponent } from '../../../shared/components/select/select.component';
 import {
   SelectOptions,
   STATUS_OPTIONS_TOKEN,
   statusOptionsProvider,
-} from '../../shared/select/select.model';
+} from '../../../shared/models/select.model';
+import { DriversService } from '../../../shared/services/driver.service';
+import { RecordIssueDatePipe } from '../../../shared/pipes/record-issue-date.pipe';
+import { ApprovedPipe } from '../../../shared/pipes/approved.pipe';
+import { RecordsService } from '../../../shared/services/records.service';
 
 @Component({
   selector: 'app-record-form-dialog',
@@ -60,11 +60,10 @@ export class RecordFormDialogComponent implements OnInit {
 
   form!: FormGroup<VehicleRecordForm>;
 
-  constructor() {
-    this.form = this.buildForm();
-  }
+  constructor() {}
 
   ngOnInit() {
+    this.form = this.buildForm();
     this.subscribeToDrivers();
     this.subscribeToRecordsService();
   }

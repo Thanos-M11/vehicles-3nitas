@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Record, RemovedRecords } from '../records.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { dateToString, isDate } from '../../helper/helper';
+import { dateToString, isDate } from '../helper/helper';
+import { Record, RemovedRecords } from '../models/records.model';
 
 @Injectable({ providedIn: 'root' })
 export class RecordFormDialogService {
