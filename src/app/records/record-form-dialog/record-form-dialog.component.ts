@@ -16,14 +16,15 @@ import { RecordIssueDatePipe } from '../record-issue-date.pipe';
 import { DatePipe } from '@angular/common';
 import { Record } from '../records.model';
 import { DriversService } from '../../drivers/driver.service';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { Driver } from '../../drivers/drivers.model';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ApprovedPipe } from '../approved.pipe';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MaterialModule } from '../../material/material.module';
 import { VehicleRecordForm } from './record-form-dialog.model';
 import { stringToDate } from '../../helper/helper';
 import { InputComponent } from '../../shared/input/input.component';
+import { SelectComponent } from '../../shared/select/select.component';
+import { SelectOptions } from '../../shared/select/select.model';
 
 @Component({
   selector: 'app-record-form-dialog',
@@ -37,6 +38,7 @@ import { InputComponent } from '../../shared/input/input.component';
     DatePipe,
     ApprovedPipe,
     InputComponent,
+    SelectComponent,
   ],
   templateUrl: './record-form-dialog.component.html',
   styleUrl: './record-form-dialog.component.css',
@@ -49,8 +51,17 @@ export class RecordFormDialogComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
 
   driversService = inject(DriversService);
-  drivers = toSignal<Driver[]>(this.driversService.loadDrivers$());
-  statusOptions = [true, false];
+  driversDropDown: SelectOptions[] = [];
+  statusOptions: SelectOptions[] = [
+    {
+      value: true,
+      label: 'Εγκεκριμένο',
+    },
+    {
+      value: false,
+      label: 'Ακυρωμένο',
+    },
+  ];
   form!: FormGroup<VehicleRecordForm>;
 
   constructor() {
@@ -58,6 +69,7 @@ export class RecordFormDialogComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subscribeToDrivers();
     this.subscribeToRecordsService();
   }
 
@@ -97,7 +109,22 @@ export class RecordFormDialogComponent implements OnInit {
     if (this.form.valid) {
       this.dialogRef.close(this.form.getRawValue());
     }
-    // console.log(this.form.getRawValue());
+    console.log(this.form.getRawValue());
+  }
+
+  private subscribeToDrivers(): void {
+    this.driversService
+      .loadDrivers$()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (drivers) =>
+          drivers.forEach((driver) =>
+            this.driversDropDown.push({
+              value: driver.fullName,
+              label: driver.fullName,
+            })
+          ),
+      });
   }
 
   private subscribeToRecordsService(): void {

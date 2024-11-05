@@ -18,15 +18,12 @@
       formControlName="plate"
     ></app-input>
 
-    <!-- fullName -->
-    <mat-form-field>
-      <mat-label>Οδηγός</mat-label>
-      <mat-select formControlName="fullName">
-        @for(driver of drivers(); track driver.id){
-        <mat-option [value]="driver.fullName">{{ driver.fullName }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+    <app-select
+      label="Οδηγός"
+      [options]="driversDropDown"
+      formControlName="fullName"
+    >
+    </app-select>
 
     <!-- issueDate -->
     <mat-form-field>
@@ -44,14 +41,11 @@
     </mat-form-field>
 
     <!-- isApproved -->
-    <mat-form-field>
-      <mat-label>Κατάσταση</mat-label>
-      <mat-select formControlName="isApproved">
-        @for(option of statusOptions; track option){
-        <mat-option [value]="option">{{ option | approved }}</mat-option>
-        }
-      </mat-select>
-    </mat-form-field>
+    <app-select
+      label="Κατάσταση"
+      [options]="statusOptions"
+      formControlName="isApproved"
+    ></app-select>
 
     <!-- tier amount -->
     <app-input

@@ -69,7 +69,7 @@ export class FilterService {
         : null,
 
       filter.driverId
-        ? (record: Record) => record.driverId.toString() === filter.driverId
+        ? (record: Record) => record.driverId?.toString() === filter.driverId
         : null,
 
       filter.isApproved === false
