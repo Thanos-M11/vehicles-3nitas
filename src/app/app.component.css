@@ -1,4 +1,12 @@
-.container {
-  display: grid;
-  grid-template-columns: 1fr 11fr;
+mat-sidenav-content section {
+  padding: 2em;
+  background-color: hsl(0, 0%, 94%);
+}
+
+mat-sidenav {
+  width: 350px;
+}
+
+mat-sidenav-container {
+  height: 100%;
 }

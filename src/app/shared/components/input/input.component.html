@@ -1,0 +1,33 @@
+<mat-form-field [appearance]="appearance">
+  <mat-label>
+    <ng-content select="mat-icon"></ng-content>
+    <span>{{ label }}</span>
+  </mat-label>
+  <div [ngSwitch]="type">
+    <input
+      *ngSwitchCase="'text'"
+      matInput
+      type="text"
+      [id]="label"
+      [name]="label"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+    />
+
+    <input
+      *ngSwitchCase="'number'"
+      matInput
+      type="number"
+      step="0.01"
+      [id]="label"
+      [name]="label"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="onInput($event)"
+      (blur)="onTouched()"
+    />
+  </div>
+  <ng-content select="mat-error"></ng-content>
+</mat-form-field>

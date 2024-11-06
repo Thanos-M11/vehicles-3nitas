@@ -1,0 +1,22 @@
+form {
+  padding: 2em;
+  background-color: hsl(0, 0%, 90%);
+}
+
+h2 {
+  margin-bottom: 1em;
+}
+
+mat-dialog-actions {
+  width: 95%;
+}
+
+mat-form-field {
+  margin-right: 0.5em;
+  width: 225px;
+  margin-top: 1em;
+}
+
+mat-error {
+  font-size: 0.8rem;
+}

@@ -1,0 +1,64 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <fieldset>
+    <app-input label="Σειρά Αριθμός" type="text" formControlName="serialNumber">
+      <mat-icon>search</mat-icon>
+    </app-input>
+
+    <app-select
+      label="Οδηγός"
+      [options]="driversDropDown"
+      formControlName="driver"
+    >
+    </app-select>
+
+    <mat-form-field>
+      <mat-label>Hμερομηνία</mat-label>
+      <mat-date-range-input formGroupName="dateRange" [rangePicker]="picker">
+        <input
+          matStartDate
+          id="start-date"
+          name="start-date"
+          placeholder="Από"
+          formControlName="start"
+        />
+        <input
+          matEndDate
+          id="end-date"
+          name="end-date"
+          placeholder="Έως"
+          formControlName="end"
+        />
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY - MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
+
+      @if(form.controls.dateRange.controls.start.hasError('matStartDateInvalid')){
+      <mat-error>Λανθασμένη ημερομηνία έναρξης</mat-error>
+      } @if(form.controls.dateRange.controls.end.hasError('matEndDateInvalid')){
+      <mat-error>Λανθασμένη ημερομηνία λήξης</mat-error>
+      }
+    </mat-form-field>
+
+    <app-select
+      label="Κατάσταση"
+      [options]="statusOptions"
+      formControlName="isApproved"
+    >
+    </app-select>
+
+    <button mat-raised-button color="primary" type="submit">Αναζήτηση</button>
+    <a
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="onClearFilter()"
+      [routerLink]="['/records']"
+    >
+      Ακύρωση
+    </a>
+  </fieldset>
+</form>

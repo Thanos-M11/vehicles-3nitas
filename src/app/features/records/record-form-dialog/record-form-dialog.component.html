@@ -1,0 +1,92 @@
+<form [formGroup]="form">
+  <mat-dialog-content>
+    <h2>#{{ data.serialNumber }}</h2>
+
+    <!-- serial number disabled -->
+    <app-input
+      type="text"
+      appearance="outline"
+      label="Σειρά Αριθμός"
+      formControlName="serialNumber"
+    ></app-input>
+
+    <!-- plate disabled -->
+    <app-input
+      type="text"
+      appearance="outline"
+      label="Πινακίδα"
+      formControlName="plate"
+    ></app-input>
+
+    <app-select
+      label="Οδηγός"
+      [options]="driversDropDown"
+      formControlName="fullName"
+    >
+    </app-select>
+
+    <!-- issueDate -->
+    <mat-form-field>
+      <mat-label>Ημερομηνία Έναρξης</mat-label>
+      <input matInput [matDatepicker]="picker" formControlName="issueDate" />
+      <mat-hint>ΜΜ/ΗΗ/ΕΕΕΕ</mat-hint>
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      @if(issueDateIsInvalid){
+      <mat-error>Μήνας / Ημερα / Ετος</mat-error>
+      }
+    </mat-form-field>
+
+    <!-- isApproved -->
+    <app-select
+      label="Κατάσταση"
+      [options]="statusOptions"
+      formControlName="isApproved"
+    ></app-select>
+
+    <!-- tier amount -->
+    <app-input
+      type="number"
+      label="Κλίμακα επιβράβευσης"
+      formControlName="tierAmount"
+    >
+      @if(tierAmountIsInvalid){
+      <mat-error>Αριθμός (0.01 - 1.00)</mat-error>
+      }
+    </app-input>
+
+    <!-- registration amount -->
+    <app-input
+      type="number"
+      label="Ποσό καταχώρησης"
+      formControlName="registrationAmount"
+    >
+      @if(registrationAmountIsInvalid){
+      <mat-error>Επιλέξτε ποσό > 0</mat-error>
+      }
+    </app-input>
+
+    <!-- consumption amount -->
+    <app-input
+      type="number"
+      label="Ποσότητα κατανάλωσης"
+      formControlName="consumptionAmount"
+    >
+      @if(consumptionAmountIsInvalid){
+      <mat-error>Επιλέξτε ποσό > 0</mat-error>
+      }
+    </app-input>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-raised-button color="warn" (click)="dialogRef.close()">
+      Ακύρωση
+    </button>
+    <button mat-raised-button color="accent" (click)="onSubmit()">
+      Καταχώρηση αλλαγών
+    </button>
+  </mat-dialog-actions>
+</form>

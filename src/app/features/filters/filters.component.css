@@ -1,0 +1,23 @@
+mat-form-field {
+  margin: 0.5em;
+}
+
+.serial-number-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+}
+
+fieldset {
+  border: none;
+  margin-bottom: 1em;
+}
+
+button {
+  margin: 0 1rem;
+}
+
+app-select {
+  margin-left: 0.5em;
+}

@@ -1,10 +1,28 @@
-<main class="container">
-  <app-vehicles />
+<main>
+  <mat-sidenav-container>
+    <mat-sidenav mode="side" #sidenav [(opened)]="opened">
+      <app-vehicles />
+    </mat-sidenav>
 
-  <section>
-    <app-toolbar />
-    <app-filters />
-    <app-records />
-    <app-pagination />
-  </section>
+    <mat-sidenav-content>
+      <app-toolbar [sidenavToggle]="sidenav.toggle.bind(sidenav)" />
+      <section>
+        <app-filters />
+        <router-outlet> </router-outlet>
+        <app-paginator />
+      </section>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </main>
+
+<!-- 
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="side" [(opened)]="opened">Side Nav</mat-sidenav>
+  <mat-sidenav-content
+    >Main
+    <button mat-fab (click)="sidenav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+  </mat-sidenav-content>
+</mat-sidenav-container> -->
