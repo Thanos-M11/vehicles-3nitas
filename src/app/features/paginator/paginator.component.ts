@@ -34,7 +34,7 @@ export class CustomPaginatorIntl implements MatPaginatorIntl {
   standalone: true,
   imports: [MatPaginatorModule, AsyncPipe],
   templateUrl: './paginator.component.html',
-  styleUrl: './paginator.component.css',
+  styleUrl: './paginator.component.scss',
   providers: [
     {
       provide: MatPaginatorIntl,

@@ -19,7 +19,7 @@ const THREE_DOTS_ICON = `
   standalone: true,
   imports: [MatIconModule],
   templateUrl: './three-dots-icon.component.html',
-  styleUrl: './three-dots-icon.component.css',
+  styleUrl: './three-dots-icon.component.scss',
 })
 export class ThreeDotsIconComponent {
   constructor() {

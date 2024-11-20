@@ -24,7 +24,7 @@ const TRUCK_ICON = `
   standalone: true,
   imports: [MatIconModule],
   templateUrl: './truck-icon.component.html',
-  styleUrl: './truck-icon.component.css',
+  styleUrl: './truck-icon.component.scss',
 })
 export class TruckIconComponent {
   constructor() {

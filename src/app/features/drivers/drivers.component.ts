@@ -9,7 +9,7 @@ import { Driver } from '../../shared/models/drivers.model';
   standalone: true,
   imports: [AsyncPipe],
   templateUrl: './drivers.component.html',
-  styleUrl: './drivers.component.css',
+  styleUrl: './drivers.component.scss',
 })
 export class DriversComponent implements OnInit {
   // private destroyRef = inject(DestroyRef);
@@ -22,19 +22,18 @@ export class DriversComponent implements OnInit {
   // drivers: Driver[] = [];
 
   ngOnInit() {
-  //   this.isFetchingSubject.next(true);
-  //   const subscription = this.driverService.loadDrivers$().subscribe({
-  //     next: (drivers) => {
-  //       this.drivers = drivers;
-  //     },
-  //     error: (error: Error) => {
-  //       this.errorSubject.next(error.message);
-  //     },
-  //     complete: () => {
-  //       this.isFetchingSubject.next(false);
-  //     },
-  //   });
-
-  //   this.destroyRef.onDestroy(() => subscription.unsubscribe());
+    //   this.isFetchingSubject.next(true);
+    //   const subscription = this.driverService.loadDrivers$().subscribe({
+    //     next: (drivers) => {
+    //       this.drivers = drivers;
+    //     },
+    //     error: (error: Error) => {
+    //       this.errorSubject.next(error.message);
+    //     },
+    //     complete: () => {
+    //       this.isFetchingSubject.next(false);
+    //     },
+    //   });
+    //   this.destroyRef.onDestroy(() => subscription.unsubscribe());
   }
 }

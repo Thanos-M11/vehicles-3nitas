@@ -36,7 +36,7 @@ import { ApprovedPipe } from '../../shared/pipes/approved.pipe';
     SelectComponent,
   ],
   templateUrl: './filters.component.html',
-  styleUrl: './filters.component.css',
+  styleUrl: './filters.component.scss',
   providers: [provideNativeDateAdapter(), statusOptionsProvider],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

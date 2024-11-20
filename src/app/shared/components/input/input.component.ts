@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [MaterialModule, CommonModule],
   templateUrl: './input.component.html',
-  styleUrl: './input.component.css',
+  styleUrl: './input.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

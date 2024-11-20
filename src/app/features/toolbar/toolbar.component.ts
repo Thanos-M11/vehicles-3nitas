@@ -11,7 +11,7 @@ import { FilterService } from '../../shared/services/filter.service';
   standalone: true,
   imports: [MatToolbar, MatIconModule, MatButtonModule, MatTooltipModule],
   templateUrl: './toolbar.component.html',
-  styleUrl: './toolbar.component.css',
+  styleUrl: './toolbar.component.scss',
 })
 export class ToolbarComponent {
   @Input({ required: true }) sidenavToggle!: () => void;

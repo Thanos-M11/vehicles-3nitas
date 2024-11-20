@@ -30,7 +30,7 @@ import { RecordsService } from '../../shared/services/records.service';
     ActionsComponent,
   ],
   templateUrl: './records.component.html',
-  styleUrl: './records.component.css',
+  styleUrl: './records.component.scss',
 })
 export class RecordsComponent implements OnInit {
   private recordsService = inject(RecordsService);

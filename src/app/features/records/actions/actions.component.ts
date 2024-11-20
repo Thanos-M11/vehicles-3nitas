@@ -12,7 +12,7 @@ import { RecordFormDialogService } from '../../../shared/services/record-form-di
   standalone: true,
   imports: [MatIconModule, MatButtonModule],
   templateUrl: './actions.component.html',
-  styleUrl: './actions.component.css',
+  styleUrl: './actions.component.scss',
 })
 export class ActionsComponent {
   @Input({ required: true }) vehicleSerialNumber!: string;

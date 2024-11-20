@@ -17,7 +17,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
     RouterLinkActive,
   ],
   templateUrl: './vehicle.component.html',
-  styleUrl: './vehicle.component.css',
+  styleUrl: './vehicle.component.scss',
 })
 export class VehicleComponent implements OnInit {
   @Input({ required: true }) plate!: string;

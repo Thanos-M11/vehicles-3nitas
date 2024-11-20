@@ -12,7 +12,7 @@ import { SelectOptions } from '../../models/select.model';
   standalone: true,
   imports: [MatFormFieldModule, MatSelectModule],
   templateUrl: './select.component.html',
-  styleUrl: './select.component.css',
+  styleUrl: './select.component.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -28,7 +28,7 @@ import { InputComponent } from '../../shared/components/input/input.component';
     InputComponent,
   ],
   templateUrl: './vehicles.component.html',
-  styleUrl: './vehicles.component.css',
+  styleUrl: './vehicles.component.scss',
 })
 export class VehiclesComponent implements OnInit {
   private vehiclesService = inject(VehiclesService);

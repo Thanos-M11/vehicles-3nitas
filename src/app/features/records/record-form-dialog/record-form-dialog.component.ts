@@ -45,7 +45,7 @@ import { RecordsService } from '../../../shared/services/records.service';
     SelectComponent,
   ],
   templateUrl: './record-form-dialog.component.html',
-  styleUrl: './record-form-dialog.component.css',
+  styleUrl: './record-form-dialog.component.scss',
   providers: [provideNativeDateAdapter(), statusOptionsProvider],
 })
 export class RecordFormDialogComponent implements OnInit {
