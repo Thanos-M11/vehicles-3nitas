@@ -1,14 +1,10 @@
 import { Component, forwardRef, Input } from '@angular/core';
 
 import { MatFormFieldAppearance } from '@angular/material/form-field';
-import { MaterialModule } from '../../../modules/material.module';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-input',
-  standalone: true,
-  imports: [MaterialModule, CommonModule],
   templateUrl: './input.component.html',
   styleUrl: './input.component.css',
   providers: [

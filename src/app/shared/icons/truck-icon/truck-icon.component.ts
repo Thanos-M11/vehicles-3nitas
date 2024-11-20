@@ -1,5 +1,5 @@
 import { Component, inject, Input } from '@angular/core';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 const TRUCK_ICON = `
@@ -21,8 +21,6 @@ const TRUCK_ICON = `
 
 @Component({
   selector: 'app-truck-icon',
-  standalone: true,
-  imports: [MatIconModule],
   templateUrl: './truck-icon.component.html',
   styleUrl: './truck-icon.component.css',
 })

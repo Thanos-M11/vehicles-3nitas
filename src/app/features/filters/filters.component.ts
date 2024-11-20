@@ -5,36 +5,22 @@ import {
   inject,
   OnInit,
 } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Filter } from '../../shared/models/filter.model';
 import { FilterService } from '../../shared/services/filter.service';
 import { VehiclesService } from '../../shared/services/vehicle.service';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { Vehicle } from '../../shared/models/vehicles.model';
 import { combineLatest } from 'rxjs';
-import { RouterLink } from '@angular/router';
-import { MaterialModule } from '../../modules/material.module';
-import { InputComponent } from '../../shared/components/input/input.component';
-import { SelectComponent } from '../../shared/components/select/select.component';
 import {
   SelectOptions,
   STATUS_OPTIONS_TOKEN,
   statusOptionsProvider,
 } from '../../shared/models/select.model';
 import { DriversService } from '../../shared/services/driver.service';
-import { ApprovedPipe } from '../../shared/pipes/approved.pipe';
 
 @Component({
   selector: 'app-filters',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    RouterLink,
-    MaterialModule,
-    InputComponent,
-    ApprovedPipe,
-    SelectComponent,
-  ],
   templateUrl: './filters.component.html',
   styleUrl: './filters.component.css',
   providers: [provideNativeDateAdapter(), statusOptionsProvider],

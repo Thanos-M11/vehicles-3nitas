@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 
 const THREE_DOTS_ICON = `
@@ -16,8 +16,6 @@ const THREE_DOTS_ICON = `
 
 @Component({
   selector: 'app-three-dots-icon',
-  standalone: true,
-  imports: [MatIconModule],
   templateUrl: './three-dots-icon.component.html',
   styleUrl: './three-dots-icon.component.css',
 })

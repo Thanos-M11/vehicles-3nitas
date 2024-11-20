@@ -1,32 +1,14 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import { VehicleComponent } from './vehicle/vehicle.component';
 import { VehicleState } from '../../shared/models/vehicles.model';
 import { VehiclesService } from '../../shared/services/vehicle.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FilterService } from '../../shared/services/filter.service';
 import { Filter } from '../../shared/models/filter.model';
-import { TruckIconComponent } from '../../shared/icons/truck-icon/truck-icon.component';
 
 import { BehaviorSubject, combineLatest } from 'rxjs';
-import { AsyncPipe } from '@angular/common';
-import { ProgressSpinnerComponent } from '../../shared/components/progress-spinner/progress-spinner.component';
-import { RouterLink } from '@angular/router';
-import { MaterialModule } from '../../modules/material.module';
-import { InputComponent } from '../../shared/components/input/input.component';
 
 @Component({
   selector: 'app-vehicles',
-  standalone: true,
-  imports: [
-    VehicleComponent,
-    ReactiveFormsModule,
-    MaterialModule,
-    TruckIconComponent,
-    AsyncPipe,
-    ProgressSpinnerComponent,
-    RouterLink,
-    InputComponent,
-  ],
   templateUrl: './vehicles.component.html',
   styleUrl: './vehicles.component.css',
 })

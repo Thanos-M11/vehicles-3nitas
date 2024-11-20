@@ -1,21 +1,11 @@
-import { Component, DestroyRef, inject, Input, OnInit } from '@angular/core';
+import { Component, DestroyRef, Input, OnInit } from '@angular/core';
 import { VehiclesService } from '../../../shared/services/vehicle.service';
 import { FilterService } from '../../../shared/services/filter.service';
 import { Filter } from '../../../shared/models/filter.model';
-import { TruckIconComponent } from '../../../shared/icons/truck-icon/truck-icon.component';
-import { ThreeDotsIconComponent } from '../../../shared/icons/three-dots-icon/three-dots-icon.component';
 import { PaginatorService } from '../../../shared/services/paginator.service';
-import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-vehicle',
-  standalone: true,
-  imports: [
-    TruckIconComponent,
-    ThreeDotsIconComponent,
-    RouterLink,
-    RouterLinkActive,
-  ],
   templateUrl: './vehicle.component.html',
   styleUrl: './vehicle.component.css',
 })

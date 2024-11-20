@@ -1,16 +1,10 @@
 import { Component, forwardRef, input, Input } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import {
-  MatFormFieldAppearance,
-  MatFormFieldModule,
-} from '@angular/material/form-field';
-import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldAppearance } from '@angular/material/form-field';
 import { SelectOptions } from '../../models/select.model';
 
 @Component({
   selector: 'app-select',
-  standalone: true,
-  imports: [MatFormFieldModule, MatSelectModule],
   templateUrl: './select.component.html',
   styleUrl: './select.component.css',
   providers: [

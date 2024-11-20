@@ -1,49 +1,21 @@
 import { Component, DestroyRef, inject, OnInit } from '@angular/core';
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogModule,
-  MatDialogRef,
-} from '@angular/material/dialog';
-import { DatePipe } from '@angular/common';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Record } from '../../../shared/models/records.model';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { provideNativeDateAdapter } from '@angular/material/core';
-import { MaterialModule } from '../../../modules/material.module';
 import { VehicleRecordForm } from '../../../shared/models/record-form-dialog.model';
 import { stringToDate } from '../../../shared/helper/helper';
-import { InputComponent } from '../../../shared/components/input/input.component';
-import { SelectComponent } from '../../../shared/components/select/select.component';
 import {
   SelectOptions,
   STATUS_OPTIONS_TOKEN,
   statusOptionsProvider,
 } from '../../../shared/models/select.model';
 import { DriversService } from '../../../shared/services/driver.service';
-import { RecordIssueDatePipe } from '../../../shared/pipes/record-issue-date.pipe';
-import { ApprovedPipe } from '../../../shared/pipes/approved.pipe';
 import { RecordsService } from '../../../shared/services/records.service';
 
 @Component({
   selector: 'app-record-form-dialog',
-  standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    MaterialModule,
-    MatDialogModule,
-    RecordIssueDatePipe,
-    DatePipe,
-    ApprovedPipe,
-    InputComponent,
-    SelectComponent,
-  ],
   templateUrl: './record-form-dialog.component.html',
   styleUrl: './record-form-dialog.component.css',
   providers: [provideNativeDateAdapter(), statusOptionsProvider],
